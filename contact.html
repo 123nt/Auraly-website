@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="audio-waves.png" type="image/x-icon" />
+    <title>Guest Book</title>
+    <link rel="stylesheet" href="contact.css" />
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init({
+          publicKey: "cRDqXPveqHRWaopHj",
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="home.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="explore.html">Explore</a>
+      <a href="https://123nt.github.io/main/potfolio.html">Blog</a>
+    </nav>
+    <div class="guestbook-container">
+      <h2>Guest Book</h2>
+      <p>Suggest songs, leave a message, or suggest a video!</p>
+
+      <form id="guestbookForm" onsubmit="sendEmail(event); return false;">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="suggestion">Song Suggestion / Message:</label>
+        <textarea
+          id="suggestion"
+          name="suggestion"
+          rows="4"
+          required
+        ></textarea>
+
+        <button type="submit">Send Suggestion</button>
+      </form>
+
+      <p class="note">
+        All suggestions will be reviewed before adding to the playlist.
+      </p>
+    </div>
+
+    <script>
+      function sendEmail(event) {
+        event.preventDefault();
+
+        const serviceID = "service_6qfw135"; // Ensure this is correct
+        const templateID = "template_7d2fk4h"; // Ensure this is correct
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const suggestion = document.getElementById("suggestion").value;
+
+        const templateParams = {
+          name: name,
+          email: email,
+          suggestion: suggestion,
+        };
+
+        console.log("Sending email with parameters:", templateParams); // Debug log
+
+        emailjs
+          .send(serviceID, templateID, templateParams)
+          .then((response) => {
+            console.log("Email sent successfully:", response); // Debug log
+            alert("Suggestion sent successfully!");
+            document.getElementById("guestbookForm").reset();
+          })
+          .catch((error) => {
+            console.error("Error sending suggestion:", error); // Debug log
+            alert("Failed to send suggestion. Please try again.");
+          });
+      }
+    </script>
+  </body>
+</html>

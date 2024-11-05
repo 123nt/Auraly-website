@@ -1,0 +1,134 @@
+/* Global Styles */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Guestbook Container */
+.guestbook-container {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: 20px auto; /* Center the container */
+}
+
+/* Centered Navbar */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e8e2cc;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar a {
+  margin: 0 20px;
+  text-decoration: none;
+  color: #955f5f;
+  font-weight: bold;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #744f4f;
+}
+
+h2,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  font-size: 15px;
+  color: #443737;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="file"],
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #fafafa;
+  transition: border-color 0.3s ease;
+}
+
+form input[type="file"] {
+  padding: 5px;
+}
+
+form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: #955f5f;
+  outline: none;
+}
+
+/* Submit Button */
+form button {
+  padding: 12px;
+  background-color: #955f5f;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #744f4f;
+}
+
+/* Note Text */
+.note {
+  font-size: 13px;
+  color: #827f7f;
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 480px) {
+  .guestbook-container {
+    padding: 15px;
+    width: 90%;
+  }
+
+  .navbar a {
+    margin: 0 10px;
+    font-size: 14px;
+  }
+
+  form button {
+    padding: 10px;
+    font-size: 15px;
+  }
+}

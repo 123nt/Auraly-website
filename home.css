@@ -1,0 +1,156 @@
+/* Reset base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "MS UI Gothic", Helvetica, Arial, sans-serif;
+  background-color: #e4e4d5;
+  color: #443737;
+  margin: 0;
+}
+
+/* Centered Navbar */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e8e2cc;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar a {
+  margin: 0 20px;
+  text-decoration: none;
+  color: #955f5f;
+  font-weight: bold;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #744f4f;
+}
+
+/* Introduction Section with Typewriter Animation */
+.introduction {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c2626;
+}
+
+.introduction::after {
+  content: "|";
+  animation: blink 1.5s step-end infinite alternate;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.intro-text {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid #2c2626;
+  animation: typing 3s steps(30, end), blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Main Content Styling */
+.content {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.main {
+  padding: 10px 15px;
+  text-align: center;
+}
+
+.main img {
+  border-radius: 15px;
+  margin-top: 5px;
+  transform: rotate(-2.5deg);
+  width: 175px;
+}
+
+.mp3container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+}
+
+.scrolltextcontainer {
+  padding: 10px;
+  border: 1px solid #ccc7c7;
+  border-radius: 5px;
+  background-color: #ece6ce5f;
+}
+
+/* Footer Styling */
+.footer {
+  padding: 20px 0;
+  text-align: center;
+  background-color: #e8e2cc71;
+}
+
+.footerbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #e8e2cc71;
+  border-radius: 10px;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.footerbar p {
+  color: #604242;
+  font-size: 15px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 561px) {
+  .navbar a {
+    margin: 0 10px;
+    font-size: 14px;
+  }
+
+  .introduction {
+    font-size: 18px;
+  }
+
+  .content {
+    padding: 10px;
+  }
+
+  .footerbar p {
+    font-size: 13px;
+  }
+}
