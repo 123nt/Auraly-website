@@ -35,6 +35,38 @@ body {
   color: #744f4f;
 }
 
+.nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo a {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.logo a:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Navigation Bar */
+nav {
+  position: fixed;
+  width: 100%;
+  padding: 5px 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  top: 0;
+}
+
 /* Introduction Section with Typewriter Animation */
 .introduction {
   display: flex;
@@ -152,5 +184,15 @@ body {
 
   .footerbar p {
     font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-content {
+    padding: 10px 20px;
+  }
+  
+  .logo a {
+    font-size: 20px;
   }
 }

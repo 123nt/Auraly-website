@@ -6,23 +6,211 @@
     <title>Mexplore</title>
     <link href="home.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="icon" href="audio-waves.png" type="image/x-icon" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="home.css" />
+    <style>
+      .search-button {
+        background: rgba(255, 255, 255, 0.25);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        padding: 8px 16px;
+        border-radius: 20px;
+        color: white;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: auto;
+      }
+      .search-button:hover {
+        background: rgba(255, 255, 255, 0.35);
+        border-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        transform: scale(1.05);
+      }
+      .search-icon {
+        width: 16px;
+        height: 16px;
+      }
+      .search-icon path {
+        fill: white;
+      }
+      @media (max-width: 768px) {
+        .search-button {
+          padding: 6px 12px;
+          font-size: 13px;
+        }
+        .search-icon {
+          width: 14px;
+          height: 14px;
+        }
+      }
+      @media (max-width: 480px) {
+        .search-button span {
+          display: none;
+        }
+        .search-button {
+          padding: 6px;
+        }
+        .search-icon {
+          margin: 0;
+        }
+      }
 
-    <title>mexplore</title>
+      .welcome-section {
+        margin-top: 15vh;
+      }
+
+      .nav-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 15px 40px;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+      }
+
+      .logo a {
+        color: #fff;
+        font-size: 24px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      nav {
+        position: fixed;
+        width: 100%;
+        padding: 5px 0;
+        z-index: 100;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(8px);
+        top: 0;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 17px;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .search-button {
+        background: rgba(255, 255, 255, 0.25);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        padding: 10px 20px;
+        border-radius: 22px;
+        color: white;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-left: auto;
+      }
+
+      .search-button:hover {
+        background: rgba(255, 255, 255, 0.35);
+        border-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        transform: scale(1.05);
+      }
+
+      .search-icon {
+        width: 18px;
+        height: 18px;
+      }
+
+      .search-icon path {
+        fill: white;
+      }
+
+      @media (max-width: 768px) {
+        .nav-content {
+          padding: 12px 20px;
+          gap: 20px;
+        }
+        .logo a {
+          font-size: 20px;
+        }
+        .nav-links {
+          gap: 15px;
+        }
+        .nav-links a {
+          font-size: 15px;
+        }
+        .search-button {
+          padding: 8px 16px;
+          font-size: 14px;
+        }
+        .search-icon {
+          width: 16px;
+          height: 16px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-content {
+          padding: 10px 15px;
+        }
+        .nav-links {
+          gap: 12px;
+        }
+        .nav-links a {
+          font-size: 14px;
+        }
+        .search-button span {
+          display: none;
+        }
+        .search-button {
+          padding: 8px;
+        }
+        .search-icon {
+          margin: 0;
+        }
+      }
+    </style>
   </head>
 
   <body>
     <!-- NAVIGATION BAR -->
-    <nav class="navbar">
-      <a href="home.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="explore.html">Explore</a>
-      <a href="contact.html">Contact</a>
-      <a href="https://123nt.github.io/main/potfolio.html">blog</a>
+    <nav>
+      <div class="nav-content">
+        <div class="logo">
+          <a href="#">Mexplore</a>
+        </div>
+        <div class="nav-links">
+          <a href="home.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="explore.html">Explore</a>
+          <a href="contact.html">Contact</a>
+          <a href="https://123nt.github.io/main/potfolio.html">Blog</a>
+        </div>
+        <button onclick="handleSearch()" class="search-button">
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+          </svg>
+          <span>Explore Music</span>
+        </button>
+      </div>
     </nav>
 
     <!-- INTRODUCTION WITH TYPEWRITER ANIMATION -->
-    <div class="introduction">
+    <div class="welcome-section">
       <span class="intro-text"
         >Welcome! Discover our curated playlists below.</span
       >
@@ -67,9 +255,14 @@
     <footer class="footer">
       <hr class="dotted3" />
       <div class="footerbar">
-        <p>© 2024 Mexplore. All Rights Reserved.</p>
+        <p> 2024 Mexplore. All Rights Reserved.</p>
       </div>
     </footer>
+    <script>
+      function handleSearch() {
+        window.location.href = 'artish/search.html';
+      }
+    </script>
     <script type="text/javascript">
       (function (d, t) {
         var v = d.createElement(t),
