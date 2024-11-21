@@ -5,6 +5,12 @@ body {
   display: flex;
   justify-content: center;
   padding: 20px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Full-screen background container */
@@ -18,7 +24,7 @@ body {
   background-position: center;
   z-index: -1;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .background-image-active {
@@ -41,23 +47,59 @@ h1 {
   margin-left: 25%;
 }
 
+/* Enhanced animations for search results */
 .song {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  background: #fff9e6;
-  padding: 10px;
-  border-radius: 20px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: transform 0.3s ease; /* Transition for hover effect */
-  margin: 10px;
-  background-color: rgba(190, 184, 184, 0.89);
-  cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 10px;
+    background-color: rgba(190, 184, 184, 0.3);
+    cursor: pointer;
+    transform-origin: center;
+    will-change: transform, box-shadow;
+    opacity: 1;
 }
 
 .song:hover {
-  transform: scale(1.15); /* Zoom on hover */
+    transform: scale(1.15);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.song.playing {
+    transform: scale(1.15);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+    animation: smoothPulse 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes smoothPulse {
+    0% {
+        transform: scale(1.15);
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        transform: scale(1.12);
+        box-shadow: 0 0 35px rgba(255, 255, 255, 0.3);
+    }
+    100% {
+        transform: scale(1.15);
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* Smooth transition when stopping */
+.song.playing.paused {
+    animation: none;
+    transform: scale(1);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Add GPU acceleration for smoother animations */
+.song, .song:hover, .song.playing {
+    backface-visibility: hidden;
+    perspective: 1000px;
+    transform-style: preserve-3d;
 }
 
 .song img {
@@ -80,10 +122,22 @@ h1 {
   font-size: 1.1em;
   text-align: center;
 }
+
 a {
-  text-decoration: nome;
+  text-decoration: none;
   color: #2b0f17;
+  transition: all 0.3s ease;
+  position: relative;
 }
+
+a:hover {
+  transform: translateY(-2px);
+}
+
+a:active {
+  transform: translateY(0);
+}
+
 .progress-container {
   display: none;
   margin-top: 10px;
@@ -93,11 +147,33 @@ a {
 
 .progress {
   width: 80%;
+  transition: width 0.3s ease-out;
 }
 
 /* Zoom class for when a song is playing */
 .zoom {
   transform: scale(1.1); /* Zoom in */
+}
+
+/* Smooth scroll for entire site */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Page transition animations */
+.page-transition {
+    animation: pageTransition 0.5s ease-out;
+}
+
+@keyframes pageTransition {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @media (max-width: 600px) {
@@ -136,3 +212,11 @@ a {
     transform: scale(1.1); /* Zoom in */
   }
 }
+
+/* Semi-transparent colors */
+.song:nth-child(6n+1) { background-color: rgba(255, 182, 193, 0.3); }  /* Light pink */
+.song:nth-child(6n+2) { background-color: rgba(173, 216, 230, 0.3); }  /* Light blue */
+.song:nth-child(6n+3) { background-color: rgba(144, 238, 144, 0.3); }  /* Light green */
+.song:nth-child(6n+4) { background-color: rgba(255, 218, 185, 0.3); }  /* Peach */
+.song:nth-child(6n+5) { background-color: rgba(221, 160, 221, 0.3); }  /* Plum */
+.song:nth-child(6n+6) { background-color: rgba(255, 255, 224, 0.3); }  /* Light yellow */

@@ -13,8 +13,6 @@
             display: flex;
             justify-content: center;
             padding: 20px;
-            min-height: 100vh;
-            margin: 0;
         }
 
         .background-image-container {
@@ -23,129 +21,27 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
+            z-index: -1;
             opacity: 0;
-            transition: all 1.5s ease-in-out;
-        }
-
-        .background-image-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
+            transition: opacity 0.5s ease;
         }
 
         .background-image-active {
             opacity: 1;
-            transform: scale(1.05);
         }
 
-        .background-image-active::before {
-            opacity: 1;
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: scale(1);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1.05);
-            }
-        }
-
-        @keyframes fadeOut {
-            0% {
-                opacity: 1;
-                transform: scale(1.05);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(1);
-            }
-        }
-
-        .search-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        #songsContainer {
+            max-width: 500px;
+            margin-right: 20%;
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
-        }
-
-        .song-list {
-            width: 100%;
-            max-width: 900px;
-            margin: 20px auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            padding: 20px;
-        }
-
-        .song-item {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 100%;
-        }
-
-        .song-item:hover {
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .song-item.playing {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .album-art {
-            width: 60px;
-            height: 60px;
-            border-radius: 8px;
-            object-fit: cover;
-        }
-
-        @media (max-width: 1024px) {
-            .song-list {
-                max-width: 800px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .search-section {
-                padding: 15px;
-            }
-            .song-list {
-                padding: 15px;
-                gap: 12px;
-            }
-            .song-item {
-                padding: 12px 15px;
-            }
-            .album-art {
-                width: 50px;
-                height: 50px;
-            }
+            gap: 4px;
+            padding: 4px;
         }
 
         h1 {
@@ -153,190 +49,268 @@
             color: #200b11;
             font-size: 2em;
             margin-bottom: 20px;
-            margin-left: -20%;
-        }
-
-        .form-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            width: 100%;
-        }
-
-        .form-input {
-            flex: 1;
-            padding: 10px;
-            border-radius: 20px;
-            border: none;
-            background: #fff9e6;
-            font-family: "Comic Sans MS", cursive, sans-serif;
-            min-width: 0;
-        }
-
-        .button {
-            padding: 10px 20px;
-            border-radius: 20px;
-            border: none;
-            background: #200b11;
-            color: white;
-            cursor: pointer;
-            font-family: "Comic Sans MS", cursive, sans-serif;
-            transition: transform 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .button:hover {
-            transform: scale(1.05);
-            background: #3a1720;
-        }
-
-        #songsContainer {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            padding: 20px;
-            align-items: center;
-            max-width: 800px;
-            margin: 0 auto;
+            margin-left: 0;
         }
 
         .song {
-            width: 100%;
             display: flex;
-            align-items: center;
-            background: rgba(190, 184, 184, 0.89);
-            padding: 15px;
+            margin-bottom: 4px;
+            background: #fff9e6;
+            padding: 10px;
             border-radius: 20px;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
             cursor: pointer;
-            transition: transform 0.3s ease;
-            position: relative;
-            max-width: 700px;
+            transition: all 0.3s ease;
+            margin: 3px auto;
+            background-color: rgba(190, 184, 184, 0.3);
+            height: 65px;
+        }
+
+        .song-content {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .song img {
+            width: 45px;
+            height: 45px;
+            border-radius: 5px;
         }
 
         .song-details {
             display: flex;
             flex-direction: column;
             justify-content: center;
+            gap: 3px;
             flex: 1;
-            padding: 0 15px;
-        }
-
-        .song-info {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-bottom: 5px;
+            position: relative;
         }
 
         .song-title {
             font-weight: bold;
             color: #050505;
-            font-size: 1.1em;
-            margin-bottom: 5px;
+            font-size: 0.95em;
+            margin: 0;
         }
 
         .song-artist {
             color: #2b0f17;
-            font-size: 0.9em;
+            font-size: 0.85em;
+            margin: 0;
+            margin-bottom: 12px;
         }
 
         .progress-container {
-            width: 100%;
-            padding: 0;
-            margin-top: 5px;
             display: none;
+            align-items: center;
+            gap: 8px;
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            right: 0;
+        }
+
+        .song.playing {
+            height: 85px;
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
         }
 
         .song.playing .progress-container {
-            display: block;
+            display: flex;
         }
 
-        .progress {
-            width: 100%;
+        .time-info {
+            font-size: 0.75em;
+            color: #2b0f17;
+            min-width: 35px;
+            background: linear-gradient(90deg, #2b0f17 0%, #4a1a28 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .progress-bar-container {
+            flex: 1;
             height: 4px;
-            -webkit-appearance: none;
-            appearance: none;
-            background: #fff9e6;
-            border-radius: 10px;
-            outline: none;
-            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
             cursor: pointer;
         }
 
-        .progress::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 12px;
-            height: 12px;
-            background: #200b11;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #2b0f17 0%, #4a1a28 100%);
+            width: 0%;
+            border-radius: 4px;
+            transition: width 0.2s ease;
         }
 
-        .progress:hover::-webkit-slider-thumb {
-            transform: scale(1.2);
+        @media (max-width: 600px) {
+            .song {
+                padding: 8px;
+                width: 120%;
+                height: 60px;
+            }
+
+            .song.playing {
+                height: 80px;
+            }
+
+            .song img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .time-info {
+                font-size: 0.7em;
+                min-width: 30px;
+            }
+
+            .song-title {
+                font-size: 0.9em;
+            }
+
+            .song-artist {
+                font-size: 0.8em;
+                margin-bottom: 10px;
+            }
+
+            .progress-container {
+                gap: 6px;
+                bottom: -10px;
+            }
         }
 
-        .zoom {
-            transform: scale(1.1);
-        }
-
+        /* Enhanced Sidebar Styles */
         .sidebar {
             position: fixed;
+            right: -400px;
             top: 0;
-            right: -100%;
-            width: 100%;
-            height: 100vh;
-            background: rgba(190, 184, 184, 0.95);
+            width: 350px;
+            height: 100%;
+            background: rgba(190, 184, 184, 0.3);
             backdrop-filter: blur(10px);
-            transition: right 0.3s ease;
-            z-index: 1000;
-            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 20px;
-            box-sizing: border-box;
-            font-family: "Comic Sans MS", cursive, sans-serif;
+            color: #2b0f17;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
         }
 
         .sidebar.active {
             right: 0;
         }
 
-        @media (min-width: 601px) {
-            .sidebar {
-                width: 400px;
-                right: -400px;
-            }
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        @media (max-width: 600px) {
-            #songsContainer {
-                width: 80%;
-                padding: 10px;
-                gap: 8px;
-            }
-
-            .song {
-                padding: 10px;
-                margin-right: 30%;
-            }
-
-            .song-details {
-                padding: 0 10px;
-            }
-
-            .song-title {
-                font-size: 0.9em;
-                padding-top: 4%;
-                padding-right: 7%;
-                padding-left: 8%;
-            }
+        #closeSidebar {
+            background: none;
+            border: none;
+            color: #2b0f17;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            transition: transform 0.3s ease;
         }
 
-        /* Back button and info button styles */
+        #closeSidebar:hover {
+            transform: scale(1.1);
+        }
+
+        .sidebar-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .song-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        #sidebarAlbumCover {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            margin: 0 auto 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        #sidebarAlbumCover:hover {
+            transform: scale(1.05);
+        }
+
+        #sidebarSongTitle {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2b0f17;
+        }
+
+        #sidebarArtist {
+            font-size: 1.1em;
+            color: #2b0f17;
+            margin-bottom: 5px;
+        }
+
+        #sidebarAlbum {
+            font-size: 1em;
+            color: #2b0f17;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .progress-info {
+            background: rgba(43, 15, 23, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: auto;
+        }
+
+        .time-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            color: #2b0f17;
+            font-size: 0.9em;
+        }
+
+        .sidebar .progress {
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: height 0.2s ease;
+        }
+
+        .sidebar .progress:hover {
+            height: 7px;
+        }
+
+        .sidebar .progress-bar {
+            height: 100%;
+            background: #fff;
+            border-radius: 5px;
+            transition: width 0.1s linear;
+        }
+
         .back-button {
             position: absolute;
             top: 20px;
@@ -355,46 +329,12 @@
             transform: scale(1.1);
         }
 
-        .info-button {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            z-index: 2;
-        }
-
-        .info-button i {
-            font-size: 35px;
-            color: #fff9e6;
-            transition: all 0.3s ease;
-        }
-
-        .info-button:hover i {
-            color: #fff;
-            transform: scale(1.1);
-        }
-
-        @media (max-width: 600px) {
-            .info-button {
-                right: 10px;
-                padding: 8px;
-            }
-
-            .info-button i {
-                font-size: 28px;
-            }
-        }
-
         .close-sidebar {
             position: absolute;
             top: 20px;
             right: 20px;
             font-size: 24px;
-            color: #fff9e6;
+            color: #2b0f17;
             background: none;
             border: none;
             cursor: pointer;
@@ -403,7 +343,85 @@
         }
 
         .close-sidebar:hover {
-            color: #fff;
+            color: #4a1a28;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px auto;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .search-input-container {
+            position: relative;
+            width: 300px;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+        }
+
+        .button {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 20px;
+            background: #2b0f17;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            min-width: 120px;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+            background: #3a1720;
+        }
+
+        .form-input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 20px;
+            border: none;
+            background: #fff9e6;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            min-width: 0;
+        }
+
+        .clear-button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+            padding: 5px;
+            display: none;
+        }
+
+        .clear-button:hover {
+            color: #333;
+        }
+
+        #searchInput {
+            width: 80%;
+            padding: 10px 35px 10px 10px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .search-section {
+            text-align: center;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
         }
     </style>
 </head>
@@ -412,20 +430,20 @@
     <button class="back-button" onclick="window.history.back()">&larr;</button>
     
     <div class="sidebar" id="sidebar">
-        <button class="close-sidebar" id="closeSidebar">&times;</button>
+        <div class="sidebar-header">
+            <button class="close-sidebar" id="closeSidebar">&times;</button>
+        </div>
         <div class="sidebar-content">
-            <div class="album-cover">
+            <div class="song-info">
                 <img id="sidebarAlbumCover" src="" alt="Album Cover">
-            </div>
-            <div class="song-info-details">
                 <h2 id="sidebarSongTitle" class="sidebar-title"></h2>
                 <p id="sidebarArtist" class="sidebar-artist"></p>
                 <p id="sidebarAlbum" class="sidebar-album"></p>
             </div>
-            <div class="sidebar-controls">
+            <div class="progress-info">
                 <div class="progress-container">
                     <input type="range" class="progress" value="0" max="100">
-                    <div class="time-display">
+                    <div class="time-info">
                         <span id="currentTime">0:00</span>
                         <span id="duration">0:00</span>
                     </div>
@@ -438,7 +456,10 @@
         <h1>Music Search</h1>
         
         <div class="form-group">
-            <input type="text" id="searchInput" class="form-input" placeholder="Search for music...">
+            <div class="search-input-container">
+                <input type="text" id="searchInput" class="form-input" placeholder="Search for music...">
+                <button class="clear-button" id="clearSearch" style="display: none;">&times;</button>
+            </div>
             <button id="searchButton" class="button">Search</button>
         </div>
 
@@ -475,17 +496,21 @@
                     songElement.className = 'song';
                     songElement.id = songId;
                     songElement.innerHTML = `
-                        <img src="${song.album.cover_medium}" alt="${song.title}" class="song-thumbnail">
-                        <div class="song-details">
-                            <div class="song-info">
+                        <div class="song-content">
+                            <img src="${song.album.cover_medium}" alt="${song.title}" class="song-thumbnail">
+                            <div class="song-details">
                                 <div class="song-title">${song.title}</div>
                                 <div class="song-artist">${song.artist.name}</div>
+                                <div class="progress-container">
+                                    <div class="time-info current-time">0:00</div>
+                                    <div class="progress-bar-container">
+                                        <div class="progress-bar"></div>
+                                    </div>
+                                    <div class="time-info duration">0:30</div>
+                                </div>
                             </div>
-                            <div class="progress-container">
-                                <input type="range" class="progress" min="0" max="100" value="0">
-                            </div>
-                            <audio class="audio-element" src="${song.preview}"></audio>
                         </div>
+                        <audio class="audio-element" src="${song.preview}"></audio>
                         <button class="info-button">
                             <i class="fas fa-info-circle"></i>
                         </button>
@@ -540,17 +565,21 @@
                 songElement.className = 'song';
                 songElement.id = songId;
                 songElement.innerHTML = `
-                    <img src="${song.album.cover_medium}" alt="${song.title}" class="song-thumbnail">
-                    <div class="song-details">
-                        <div class="song-info">
+                    <div class="song-content">
+                        <img src="${song.album.cover_medium}" alt="${song.title}" class="song-thumbnail">
+                        <div class="song-details">
                             <div class="song-title">${song.title}</div>
                             <div class="song-artist">${song.artist.name}</div>
+                            <div class="progress-container">
+                                <div class="time-info current-time">0:00</div>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar"></div>
+                                </div>
+                                <div class="time-info duration">0:30</div>
+                            </div>
                         </div>
-                        <div class="progress-container">
-                            <input type="range" class="progress" min="0" max="100" value="0">
-                        </div>
-                        <audio class="audio-element" src="${song.preview}"></audio>
                     </div>
+                    <audio class="audio-element" src="${song.preview}"></audio>
                     <button class="info-button">
                         <i class="fas fa-info-circle"></i>
                     </button>
@@ -692,12 +721,14 @@
 
         function updateProgress(audio, songId) {
             const songElement = document.getElementById(songId);
-            const progress = songElement.querySelector('.progress');
+            const progressBar = songElement.querySelector('.progress-bar');
+            const currentTimeSpan = songElement.querySelector('.current-time');
 
             function update() {
                 if (!audio.paused) {
                     const value = (audio.currentTime / audio.duration) * 100;
-                    progress.value = value;
+                    progressBar.style.width = `${value}%`;
+                    currentTimeSpan.textContent = formatTime(audio.currentTime);
                     requestAnimationFrame(update);
                 }
             }
@@ -707,15 +738,23 @@
 
         function setupProgressBar(songId) {
             const songElement = document.getElementById(songId);
-            const progress = songElement.querySelector('.progress');
+            const progressBarContainer = songElement.querySelector('.progress-bar-container');
+            const progressBar = songElement.querySelector('.progress-bar');
             const audio = songElement.querySelector('.audio-element');
+            const currentTimeSpan = songElement.querySelector('.current-time');
 
-            progress.addEventListener("input", (event) => {
-                const time = (audio.duration / 100) * event.target.value;
+            progressBarContainer.addEventListener("click", (event) => {
+                const rect = progressBarContainer.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const percentage = (x / rect.width) * 100;
+                const time = (audio.duration / 100) * percentage;
                 audio.currentTime = time;
+                progressBar.style.width = `${percentage}%`;
+                currentTimeSpan.textContent = formatTime(time);
             });
 
-            progress.value = 0;
+            progressBar.style.width = '0%';
+            currentTimeSpan.textContent = '0:00';
         }
 
         function updateSidebar(songId) {
@@ -756,9 +795,9 @@
         }
 
         function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs.toString().padStart(2, '0')}`;
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -776,6 +815,20 @@
                     sidebar.classList.remove('active');
                 }
             });
+        });
+
+        const clearSearchButton = document.getElementById('clearSearch');
+        clearSearchButton.addEventListener('click', () => {
+            searchInput.value = '';
+            clearSearchButton.style.display = 'none';
+        });
+
+        searchInput.addEventListener('input', () => {
+            if (searchInput.value) {
+                clearSearchButton.style.display = 'block';
+            } else {
+                clearSearchButton.style.display = 'none';
+            }
         });
 
         searchButton.addEventListener('click', () => performSearch(searchInput.value));

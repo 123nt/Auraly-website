@@ -8,6 +8,7 @@ const searchInput = document.getElementById('searchInput');
 const searchButton = document.querySelector('.search-button');
 const searchResults = document.getElementById('searchResults');
 const bgContainer = document.querySelector('.background-image-container');
+const clearSearchButton = document.getElementById('clearSearch');
 
 // Search function
 async function performSearch(query) {
@@ -32,12 +33,43 @@ async function performSearch(query) {
     }
 }
 
+// Debounce function to limit API calls
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Debounced search function
+const debouncedSearch = debounce(performSearch, 300);
+
 // Attach search events
-searchInput.addEventListener('input', (e) => performSearch(e.target.value));
-searchButton.addEventListener('click', () => performSearch(searchInput.value));
-searchInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') performSearch(searchInput.value);
+searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.trim();
+    if (query) {
+        clearSearchButton.style.display = 'block';
+        debouncedSearch(query);
+    } else {
+        clearSearchButton.style.display = 'none';
+        searchResults.innerHTML = '';
+    }
 });
+
+clearSearchButton.addEventListener('click', () => {
+    searchInput.value = '';
+    clearSearchButton.style.display = 'none';
+    searchResults.innerHTML = '';
+});
+
+// Remove the old search button event listener since we're doing real-time search
+searchButton.removeEventListener('click', () => performSearch(searchInput.value));
+searchButton.addEventListener('click', () => performSearch(searchInput.value.trim()));
 
 function displayResults(songs) {
     if (!songs || songs.length === 0) {
@@ -46,9 +78,10 @@ function displayResults(songs) {
     }
 
     searchResults.innerHTML = '';
-    songs.forEach(song => {
-        const songItem = createSongElement(song);
-        searchResults.appendChild(songItem);
+    songs.forEach((song, index) => {
+        const songElement = createSongElement(song);
+        songElement.style.setProperty('--animation-order', index);
+        searchResults.appendChild(songElement);
     });
 }
 
@@ -127,11 +160,15 @@ function togglePlay(songElement) {
     if (currentlyPlaying === audio) {
         if (audio.paused) {
             audio.play().catch(console.error);
-            songElement.classList.add('zoom');
+            songElement.classList.remove('paused');
+            songElement.classList.add('playing');
             progressContainer.style.display = 'block';
         } else {
             audio.pause();
-            songElement.classList.remove('zoom');
+            songElement.classList.add('paused');
+            setTimeout(() => {
+                songElement.classList.remove('playing', 'paused');
+            }, 500);
             progressContainer.style.display = 'none';
         }
         return;
@@ -140,7 +177,10 @@ function togglePlay(songElement) {
     if (currentlyPlaying) {
         currentlyPlaying.pause();
         if (currentlyPlayingSong) {
-            currentlyPlayingSong.classList.remove('zoom');
+            currentlyPlayingSong.classList.add('paused');
+            setTimeout(() => {
+                currentlyPlayingSong.classList.remove('playing', 'paused');
+            }, 500);
             const prevProgress = currentlyPlayingSong.querySelector('.progress-container');
             if (prevProgress) prevProgress.style.display = 'none';
         }
@@ -148,7 +188,8 @@ function togglePlay(songElement) {
 
     audio.currentTime = 0;
     audio.play().catch(console.error);
-    songElement.classList.add('zoom');
+    songElement.classList.add('playing');
+    songElement.classList.remove('paused');
     progressContainer.style.display = 'block';
     currentlyPlaying = audio;
     currentlyPlayingSong = songElement;
@@ -180,10 +221,14 @@ document.addEventListener('keydown', (e) => {
         if (currentlyPlaying) {
             if (currentlyPlaying.paused) {
                 currentlyPlaying.play().catch(console.error);
-                currentlyPlayingSong.classList.add('zoom');
+                currentlyPlayingSong.classList.add('playing');
+                currentlyPlayingSong.classList.remove('paused');
             } else {
                 currentlyPlaying.pause();
-                currentlyPlayingSong.classList.remove('zoom');
+                currentlyPlayingSong.classList.add('paused');
+                setTimeout(() => {
+                    currentlyPlayingSong.classList.remove('playing', 'paused');
+                }, 500);
             }
         }
     }
