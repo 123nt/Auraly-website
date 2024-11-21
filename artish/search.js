@@ -1,37 +1,13 @@
 let currentAudio = null;
-let currentSongItem = null;
 let isDragging = false;
 let audioElements = new Map();
 let currentlyPlaying = null;
+let currentlyPlayingSong = null;
 
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.querySelector('.search-button');
 const searchResults = document.getElementById('searchResults');
 const bgContainer = document.querySelector('.background-image-container');
-
-// Initialize sidebar
-const sidebar = new Sidebar();
-
-// Get search query from URL if present
-const urlParams = new URLSearchParams(window.location.search);
-const searchQuery = urlParams.get('q');
-if (searchQuery) {
-    searchInput.value = searchQuery;
-    performSearch(searchQuery);
-}
-
-// Debounce function
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
 
 // Search function
 async function performSearch(query) {
@@ -57,13 +33,10 @@ async function performSearch(query) {
 }
 
 // Attach search events
-const debouncedSearch = debounce(performSearch, 500);
-searchInput.addEventListener('input', (e) => debouncedSearch(e.target.value));
+searchInput.addEventListener('input', (e) => performSearch(e.target.value));
 searchButton.addEventListener('click', () => performSearch(searchInput.value));
 searchInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        performSearch(searchInput.value);
-    }
+    if (e.key === 'Enter') performSearch(searchInput.value);
 });
 
 function displayResults(songs) {
@@ -73,7 +46,7 @@ function displayResults(songs) {
     }
 
     searchResults.innerHTML = '';
-    songs.forEach((song, index) => {
+    songs.forEach(song => {
         const songItem = createSongElement(song);
         searchResults.appendChild(songItem);
     });
@@ -92,33 +65,68 @@ function createSongElement(song) {
             <div class="song-title">${song.title}</div>
             <div class="song-artist">${song.artist.name}</div>
             <div class="progress-container">
-                <progress class="progress" value="0" max="100"></progress>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 0%"></div>
+                </div>
             </div>
         </div>
     `;
 
-    songElement.addEventListener('click', () => togglePlay(songElement));
+    songElement.addEventListener('click', (e) => {
+        if (!e.target.closest('.progress-bar')) {
+            togglePlay(songElement);
+        }
+    });
+
+    const progressBar = songElement.querySelector('.progress-bar');
+    progressBar.addEventListener('mousedown', (e) => {
+        if (currentlyPlaying && currentlyPlayingSong === songElement) {
+            e.stopPropagation();
+            isDragging = true;
+            updateProgress(e, progressBar);
+        }
+    });
+
     return songElement;
+}
+
+function updateProgress(e, progressBar) {
+    const rect = progressBar.getBoundingClientRect();
+    const percentage = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    if (currentlyPlaying) {
+        currentlyPlaying.currentTime = percentage * currentlyPlaying.duration;
+        const progress = progressBar.querySelector('.progress');
+        progress.style.width = `${percentage * 100}%`;
+    }
+}
+
+function createAudioElement(songId, audioUrl) {
+    const audio = new Audio(audioUrl);
+    audio.addEventListener('ended', () => {
+        const currentSongElement = document.querySelector(`[data-song-id="${songId}"]`);
+        const nextSong = currentSongElement.nextElementSibling;
+        if (nextSong && nextSong.classList.contains('song')) {
+            togglePlay(nextSong);
+        }
+    });
+    audioElements.set(songId, audio);
+    return audio;
 }
 
 function togglePlay(songElement) {
     const songId = songElement.getAttribute('data-song-id');
     const audioUrl = songElement.getAttribute('data-audio-url');
-    const audio = document.querySelector(`#audio-${songId}`) || createAudioElement(songId, audioUrl);
+    const audio = audioElements.get(songId) || createAudioElement(songId, audioUrl);
     const progressContainer = songElement.querySelector('.progress-container');
-    const bgContainer = document.querySelector('.background-image-container');
     
-    // Set background image
-    const imageUrl = songElement.getAttribute('data-image-url');
-    if (imageUrl) {
+    if (imageUrl = songElement.getAttribute('data-image-url')) {
         bgContainer.style.backgroundImage = `url('${imageUrl}')`;
         bgContainer.classList.add('background-image-active');
     }
 
-    // If clicking the same song
     if (currentlyPlaying === audio) {
         if (audio.paused) {
-            audio.play();
+            audio.play().catch(console.error);
             songElement.classList.add('zoom');
             progressContainer.style.display = 'block';
         } else {
@@ -129,49 +137,41 @@ function togglePlay(songElement) {
         return;
     }
 
-    // If playing a different song
     if (currentlyPlaying) {
         currentlyPlaying.pause();
-        currentlyPlayingSong.classList.remove('zoom');
-        currentlyPlayingSong.querySelector('.progress-container').style.display = 'none';
+        if (currentlyPlayingSong) {
+            currentlyPlayingSong.classList.remove('zoom');
+            const prevProgress = currentlyPlayingSong.querySelector('.progress-container');
+            if (prevProgress) prevProgress.style.display = 'none';
+        }
     }
 
-    // Play new song
-    audio.play();
+    audio.currentTime = 0;
+    audio.play().catch(console.error);
     songElement.classList.add('zoom');
     progressContainer.style.display = 'block';
     currentlyPlaying = audio;
     currentlyPlayingSong = songElement;
 
-    // Update progress
     const progress = songElement.querySelector('.progress');
-    audio.addEventListener('timeupdate', () => {
-        const value = (audio.currentTime / audio.duration) * 100;
-        progress.value = value;
-    });
-
-    // Handle song end
-    audio.addEventListener('ended', () => {
-        songElement.classList.remove('zoom');
-        progressContainer.style.display = 'none';
-        currentlyPlaying = null;
-        currentlyPlayingSong = null;
-        
-        // Auto-play next song
-        const nextSong = songElement.nextElementSibling;
-        if (nextSong && nextSong.classList.contains('song')) {
-            setTimeout(() => togglePlay(nextSong), 2000);
+    const updateProgressBar = () => {
+        if (!isDragging && audio) {
+            progress.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
         }
-    });
+    };
+
+    audio.removeEventListener('timeupdate', updateProgressBar);
+    audio.addEventListener('timeupdate', updateProgressBar);
 }
 
-function createAudioElement(songId, audioUrl) {
-    const audio = document.createElement('audio');
-    audio.id = `audio-${songId}`;
-    audio.src = audioUrl;
-    document.body.appendChild(audio);
-    return audio;
-}
+document.addEventListener('mousemove', (e) => {
+    if (isDragging && currentlyPlaying && currentlyPlayingSong) {
+        const progressBar = currentlyPlayingSong.querySelector('.progress-bar');
+        updateProgress(e, progressBar);
+    }
+});
+
+document.addEventListener('mouseup', () => isDragging = false);
 
 // Space bar control
 document.addEventListener('keydown', (e) => {
@@ -179,7 +179,7 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
         if (currentlyPlaying) {
             if (currentlyPlaying.paused) {
-                currentlyPlaying.play();
+                currentlyPlaying.play().catch(console.error);
                 currentlyPlayingSong.classList.add('zoom');
             } else {
                 currentlyPlaying.pause();
@@ -188,33 +188,3 @@ document.addEventListener('keydown', (e) => {
         }
     }
 });
-
-// Listen for suggestion clicks
-window.addEventListener('play-suggestion', (event) => {
-    const songData = event.detail;
-    
-    // Create a temporary element to hold the song
-    const tempElement = document.createElement('div');
-    tempElement.innerHTML = createSongElement(songData);
-    const songElement = tempElement.firstChild;
-    
-    // Add it to the results
-    document.querySelector('.search-results').appendChild(songElement);
-    
-    // Play the song
-    togglePlay(songElement);
-});
-
-// Function to format time
-function formatTime(seconds) {
-    if (isNaN(seconds)) return '0:00';
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60).toString().padStart(2, '0');
-    return `${mins}:${secs}`;
-}
-
-// Function to update background
-function updateBackground(imageUrl) {
-    bgContainer.style.backgroundImage = `url('${imageUrl}')`;
-    bgContainer.classList.add('background-image-active');
-}

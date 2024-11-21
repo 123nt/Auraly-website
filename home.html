@@ -1,263 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mexplore</title>
-    <link href="home.css" rel="stylesheet" type="text/css" media="all" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Explorer</title>
+    <link rel="stylesheet" href="home.css">
     <link rel="icon" href="audio-waves.png" type="image/x-icon" />
-    <link rel="stylesheet" href="home.css" />
-    <style>
-      .search-button {
-        background: rgba(255, 255, 255, 0.25);
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        padding: 8px 16px;
-        border-radius: 20px;
-        color: white;
-        font-size: 14px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-left: auto;
-      }
-      .search-button:hover {
-        background: rgba(255, 255, 255, 0.35);
-        border-color: rgba(255, 255, 255, 0.5);
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-        transform: scale(1.05);
-      }
-      .search-icon {
-        width: 16px;
-        height: 16px;
-      }
-      .search-icon path {
-        fill: white;
-      }
-      @media (max-width: 768px) {
-        .search-button {
-          padding: 6px 12px;
-          font-size: 13px;
-        }
-        .search-icon {
-          width: 14px;
-          height: 14px;
-        }
-      }
-      @media (max-width: 480px) {
-        .search-button span {
-          display: none;
-        }
-        .search-button {
-          padding: 6px;
-        }
-        .search-icon {
-          margin: 0;
-        }
-      }
-
-      .welcome-section {
-        margin-top: 15vh;
-      }
-
-      .nav-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 15px 40px;
-        display: flex;
-        align-items: center;
-        gap: 30px;
-      }
-
-      .logo a {
-        color: #fff;
-        font-size: 24px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: color 0.3s ease;
-      }
-
-      nav {
-        position: fixed;
-        width: 100%;
-        padding: 5px 0;
-        z-index: 100;
-        background: rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(8px);
-        top: 0;
-      }
-
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 30px;
-      }
-
-      .nav-links a {
-        color: white;
-        text-decoration: none;
-        font-size: 17px;
-        font-weight: 500;
-        transition: color 0.3s ease;
-      }
-
-      .nav-links a:hover {
-        color: rgba(255, 255, 255, 0.8);
-      }
-
-      .search-button {
-        background: rgba(255, 255, 255, 0.25);
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        padding: 10px 20px;
-        border-radius: 22px;
-        color: white;
-        font-size: 16px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-left: auto;
-      }
-
-      .search-button:hover {
-        background: rgba(255, 255, 255, 0.35);
-        border-color: rgba(255, 255, 255, 0.5);
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-        transform: scale(1.05);
-      }
-
-      .search-icon {
-        width: 18px;
-        height: 18px;
-      }
-
-      .search-icon path {
-        fill: white;
-      }
-
-      @media (max-width: 768px) {
-        .nav-content {
-          padding: 12px 20px;
-          gap: 20px;
-        }
-        .logo a {
-          font-size: 20px;
-        }
-        .nav-links {
-          gap: 15px;
-        }
-        .nav-links a {
-          font-size: 15px;
-        }
-        .search-button {
-          padding: 8px 16px;
-          font-size: 14px;
-        }
-        .search-icon {
-          width: 16px;
-          height: 16px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .nav-content {
-          padding: 10px 15px;
-        }
-        .nav-links {
-          gap: 12px;
-        }
-        .nav-links a {
-          font-size: 14px;
-        }
-        .search-button span {
-          display: none;
-        }
-        .search-button {
-          padding: 8px;
-        }
-        .search-icon {
-          margin: 0;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <!-- NAVIGATION BAR -->
-    <nav>
-      <div class="nav-content">
-        <div class="logo">
-          <a href="#">Mexplore</a>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <a href="home.html">
+                    <img src="audio-waves.png" alt="Logo" class="logo-img">
+                    <span>Mexplore</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="home.html" class="active">Home</a>
+                <a href="about.html">About</a>
+                <a href="explore.html">Explore</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <a href="artish/search.html" class="search-button">
+                <svg class="search-icon" viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+                <span>Search</span>
+            </a>
         </div>
-        <div class="nav-links">
-          <a href="home.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="explore.html">Explore</a>
-          <a href="contact.html">Contact</a>
-          <a href="https://123nt.github.io/main/potfolio.html">Blog</a>
-        </div>
-        <button onclick="handleSearch()" class="search-button">
-          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-          </svg>
-          <span>Explore Music</span>
-        </button>
-      </div>
     </nav>
 
-    <!-- INTRODUCTION WITH TYPEWRITER ANIMATION -->
-    <div class="welcome-section">
-      <span class="intro-text"
-        >Welcome! Discover our curated playlists below.</span
-      >
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div class="content">
-      <div class="main">
-        <hr class="solid1" />
-        <img
-          src="https://i.scdn.co/image/ab67616d0000b273ef48afb0db869873fabbfcb6"
-          alt="Gali 70%"
-        />
-        <p style="padding: 5px">
-          Welcome to <b>Mexplore</b>... This is where I'll be sharing pieces of
-          myself and my mind. Enjoy!
-        </p>
-
-        <hr class="solid1" />
-        <p>The song name is <strong>70% by Gali</strong></p>
-
-        <!-- MP3 PLAYER -->
-        <div class="mp3container">
-          <div class="scrolltextcontainer">
-            <p>Gali - 70%</p>
-            <p>(Headphone recommendation)</p>
-          </div>
-          <audio class="mp3" controls>
-            <source src="GALI - 70 - LIOUBE (youtube).mp3" type="audio/mpeg" />
-          </audio>
+    <div class="song-container">
+        <div class="song-card" style="--delay: 0s;">
+            <img src="https://i.scdn.co/image/ab67616d0000b273ef48afb0db869873fabbfcb6" alt="Song Cover">
+            <div class="song-info">
+                <h3>GALI - 70%</h3>
+                <p>Electronic</p>
+                <audio controls>
+                    <source src="GALI - 70 - LIOUBE (youtube).mp3" type="audio/mpeg">
+                </audio>
+            </div>
         </div>
-
-        <hr class="solid1" />
-        <p>
-          Explore the <a href="explore.html">playlist</a> that may be your
-          favorite.
-        </p>
-      </div>
+        <div class="song-card" style="--delay: 0.2s;">
+            <img src="https://i.scdn.co/image/ab67616d0000b2732cc79c6f39c44970a0832b69" alt="Song Cover">
+            <div class="song-info">
+                <h3>Chill Vibes</h3>
+                <p>Lo-fi</p>
+                <audio controls>
+                    <source src="song2.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+        <div class="song-card" style="--delay: 0.4s;">
+            <img src="https://i.scdn.co/image/ab67616d0000b273b52a65c8c74d9f3f4c590c38" alt="Song Cover">
+            <div class="song-info">
+                <h3>Deep Focus</h3>
+                <p>Ambient</p>
+                <audio controls>
+                    <source src="song3.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+        <div class="song-card" style="--delay: 0.6s;">
+            <img src="https://i.scdn.co/image/ab67616d0000b273ef48afb0db869873fabbfcb6" alt="Song Cover">
+            <div class="song-info">
+                <h3>Night Drive</h3>
+                <p>Electronic</p>
+                <audio controls>
+                    <source src="song4.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+        <div class="song-card" style="--delay: 0.8s;">
+            <img src="https://i.scdn.co/image/ab67616d0000b2732cc79c6f39c44970a0832b69" alt="Song Cover">
+            <div class="song-info">
+                <h3>Morning Coffee</h3>
+                <p>Jazz</p>
+                <audio controls>
+                    <source src="song5.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+        <div class="song-card" style="--delay: 1s;">
+            <img src="https://i.scdn.co/image/ab67616d0000b273b52a65c8c74d9f3f4c590c38" alt="Song Cover">
+            <div class="song-info">
+                <h3>Sunset Dreams</h3>
+                <p>Chillwave</p>
+                <audio controls>
+                    <source src="song6.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
     </div>
 
-    <!-- FOOTER -->
     <footer class="footer">
-      <hr class="dotted3" />
-      <div class="footerbar">
-        <p> 2024 Mexplore. All Rights Reserved.</p>
-      </div>
+        <div class="footerbar">
+            <p> 2024 Mexplore. All Rights Reserved.</p>
+        </div>
     </footer>
+
+    <script>
+        // Typewriter effect for introduction
+        const text = "Discover your melody...";
+        let index = 0;
+        
+        function typeWriter() {
+            if (index < text.length) {
+                document.querySelector('.intro-text').textContent += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+
+        window.onload = typeWriter;
+    </script>
     <script>
       function handleSearch() {
         window.location.href = 'artish/search.html';
@@ -279,5 +136,5 @@
         s.parentNode.insertBefore(v, s);
       })(document, "script");
     </script>
-  </body>
+</body>
 </html>
