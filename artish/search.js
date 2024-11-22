@@ -97,11 +97,6 @@ function createSongElement(song) {
         <div class="song-details">
             <div class="song-title">${song.title}</div>
             <div class="song-artist">${song.artist.name}</div>
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div class="progress" style="width: 0%"></div>
-                </div>
-            </div>
         </div>
     `;
 
@@ -111,26 +106,77 @@ function createSongElement(song) {
         }
     });
 
-    const progressBar = songElement.querySelector('.progress-bar');
-    progressBar.addEventListener('mousedown', (e) => {
-        if (currentlyPlaying && currentlyPlayingSong === songElement) {
-            e.stopPropagation();
-            isDragging = true;
-            updateProgress(e, progressBar);
-        }
-    });
-
     return songElement;
 }
 
-function updateProgress(e, progressBar) {
-    const rect = progressBar.getBoundingClientRect();
-    const percentage = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    if (currentlyPlaying) {
-        currentlyPlaying.currentTime = percentage * currentlyPlaying.duration;
-        const progress = progressBar.querySelector('.progress');
-        progress.style.width = `${percentage * 100}%`;
+function togglePlay(songElement) {
+    const songId = songElement.getAttribute('data-song-id');
+    const audioUrl = songElement.getAttribute('data-audio-url');
+    const audio = audioElements.get(songId) || createAudioElement(songId, audioUrl);
+    
+    if (imageUrl = songElement.getAttribute('data-image-url')) {
+        bgContainer.style.backgroundImage = `url('${imageUrl}')`;
+        bgContainer.classList.add('background-image-active');
     }
+
+    if (currentlyPlaying === audio) {
+        if (audio.paused) {
+            audio.play().catch(console.error);
+            songElement.classList.remove('paused');
+            songElement.classList.add('playing');
+        } else {
+            audio.pause();
+            songElement.classList.add('paused');
+            setTimeout(() => {
+                songElement.classList.remove('playing', 'paused');
+            }, 500);
+        }
+        return;
+    }
+
+    if (currentlyPlaying) {
+        currentlyPlaying.pause();
+        if (currentlyPlayingSong) {
+            currentlyPlayingSong.classList.add('paused');
+            setTimeout(() => {
+                currentlyPlayingSong.classList.remove('playing', 'paused');
+            }, 500);
+        }
+    }
+
+    audio.currentTime = 0;
+    audio.play().catch(console.error);
+    songElement.classList.add('playing');
+    songElement.classList.remove('paused');
+    currentlyPlaying = audio;
+    currentlyPlayingSong = songElement;
+}
+
+// Space bar control
+document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space' && !e.target.matches('input')) {
+        e.preventDefault();
+        if (currentlyPlaying) {
+            if (currentlyPlaying.paused) {
+                currentlyPlaying.play();
+                if (currentlyPlayingSong) {
+                    currentlyPlayingSong.classList.remove('paused');
+                    currentlyPlayingSong.classList.add('playing');
+                }
+            } else {
+                currentlyPlaying.pause();
+                if (currentlyPlayingSong) {
+                    currentlyPlayingSong.classList.add('paused');
+                }
+            }
+        }
+    }
+});
+
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
 }
 
 function createAudioElement(songId, audioUrl) {
@@ -146,90 +192,185 @@ function createAudioElement(songId, audioUrl) {
     return audio;
 }
 
-function togglePlay(songElement) {
-    const songId = songElement.getAttribute('data-song-id');
-    const audioUrl = songElement.getAttribute('data-audio-url');
-    const audio = audioElements.get(songId) || createAudioElement(songId, audioUrl);
-    const progressContainer = songElement.querySelector('.progress-container');
+function playSong(title, artist, albumCover, previewUrl, songData) {
+    currentSongData = songData;
     
-    if (imageUrl = songElement.getAttribute('data-image-url')) {
-        bgContainer.style.backgroundImage = `url('${imageUrl}')`;
-        bgContainer.classList.add('background-image-active');
+    let bottomPlayer = document.querySelector('.bottom-player');
+    if (!bottomPlayer) {
+        bottomPlayer = document.createElement('div');
+        bottomPlayer.id = 'bottomPlayer';
+        bottomPlayer.className = 'bottom-player';
+        bottomPlayer.innerHTML = `
+            <img src="${albumCover}" alt="${title}" class="album-cover">
+            <div class="song-info">
+                <div class="song-title">${title}</div>
+                <div class="song-artist">${artist}</div>
+            </div>
+            <button class="play-pause-btn">
+                <i class="fas fa-play"></i>
+            </button>
+        `;
+        document.body.appendChild(bottomPlayer);
+
+        const playPauseBtn = bottomPlayer.querySelector('.play-pause-btn');
+        playPauseBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (window.audio) {
+                if (window.audio.paused) {
+                    window.audio.play();
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                } else {
+                    window.audio.pause();
+                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                }
+            }
+        });
+
+        bottomPlayer.addEventListener('click', function(e) {
+            if (e.target.closest('.play-pause-btn')) {
+                return;
+            }
+
+            const sidebar = document.getElementById('sidebar');
+
+            if (!sidebar.classList.contains('active')) {
+                const bottomPlayerColor = window.getComputedStyle(bottomPlayer).backgroundColor;
+                sidebar.style.background = bottomPlayerColor;
+                sidebar.style.transform = '';
+                sidebar.classList.add('active');
+                bottomPlayer.classList.add('sidebar-active');
+            }
+
+            e.stopPropagation();
+        });
+    } else {
+        bottomPlayer.querySelector('img').src = albumCover;
+        bottomPlayer.querySelector('.song-title').textContent = title;
+        bottomPlayer.querySelector('.song-artist').textContent = artist;
     }
 
-    if (currentlyPlaying === audio) {
-        if (audio.paused) {
-            audio.play().catch(console.error);
-            songElement.classList.remove('paused');
-            songElement.classList.add('playing');
-            progressContainer.style.display = 'block';
-        } else {
-            audio.pause();
-            songElement.classList.add('paused');
-            setTimeout(() => {
-                songElement.classList.remove('playing', 'paused');
-            }, 500);
-            progressContainer.style.display = 'none';
-        }
-        return;
+    if (window.audio) {
+        window.audio.pause();
     }
+    window.audio = new Audio(previewUrl);
+    window.audio.addEventListener('ended', () => {
+        const playPauseBtn = document.querySelector('.play-pause-btn i');
+        playPauseBtn.className = 'fas fa-play';
+    });
 
-    if (currentlyPlaying) {
-        currentlyPlaying.pause();
-        if (currentlyPlayingSong) {
-            currentlyPlayingSong.classList.add('paused');
-            setTimeout(() => {
-                currentlyPlayingSong.classList.remove('playing', 'paused');
-            }, 500);
-            const prevProgress = currentlyPlayingSong.querySelector('.progress-container');
-            if (prevProgress) prevProgress.style.display = 'none';
-        }
-    }
-
-    audio.currentTime = 0;
-    audio.play().catch(console.error);
-    songElement.classList.add('playing');
-    songElement.classList.remove('paused');
-    progressContainer.style.display = 'block';
-    currentlyPlaying = audio;
-    currentlyPlayingSong = songElement;
-
-    const progress = songElement.querySelector('.progress');
-    const updateProgressBar = () => {
-        if (!isDragging && audio) {
-            progress.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
-        }
-    };
-
-    audio.removeEventListener('timeupdate', updateProgressBar);
-    audio.addEventListener('timeupdate', updateProgressBar);
+    setTimeout(() => {
+        bottomPlayer.classList.add('active');
+    }, 100);
 }
 
-document.addEventListener('mousemove', (e) => {
-    if (isDragging && currentlyPlaying && currentlyPlayingSong) {
-        const progressBar = currentlyPlayingSong.querySelector('.progress-bar');
-        updateProgress(e, progressBar);
+function handleSongClick(songId) {
+    const songElement = document.getElementById(songId);
+    const songTitle = songElement.querySelector('.song-title').textContent;
+    const songArtist = songElement.querySelector('.song-artist').textContent;
+    const albumCover = songElement.querySelector('img').src;
+    const bottomPlayer = document.getElementById('bottomPlayer');
+    const sidebar = document.getElementById('sidebar');
+
+    const computedStyle = window.getComputedStyle(songElement);
+    const backgroundColor = computedStyle.backgroundColor;
+    
+    const moreOpaqueColor = backgroundColor.replace('0.3', '0.95');
+    bottomPlayer.style.background = moreOpaqueColor;
+    sidebar.style.background = moreOpaqueColor;
+    
+    document.getElementById('playerSongTitle').textContent = songTitle;
+    document.getElementById('playerArtist').textContent = songArtist;
+    document.getElementById('playerAlbumCover').src = albumCover;
+    
+    if (currentlyPlayingSong) {
+        currentlyPlayingSong.classList.remove('playing');
+    }
+    songElement.classList.add('playing');
+    currentlyPlayingSong = songElement;
+    
+    bottomPlayer.classList.add('active');
+    updatePlayPauseButton();
+}
+
+document.addEventListener('click', function(e) {
+    const sidebar = document.getElementById('sidebar');
+    const bottomPlayer = document.getElementById('bottomPlayer');
+
+    if (sidebar.classList.contains('active') && 
+        !sidebar.contains(e.target) && 
+        !bottomPlayer.contains(e.target)) {
+        sidebar.classList.remove('active');
+        bottomPlayer.classList.remove('sidebar-active');
+        sidebar.style.transform = '';
     }
 });
 
-document.addEventListener('mouseup', () => isDragging = false);
+document.getElementById('bottomPlayer').addEventListener('touchmove', function(e) {
+    e.preventDefault();
+});
 
-// Space bar control
-document.addEventListener('keydown', (e) => {
-    if (e.code === 'Space' && !e.target.matches('input')) {
-        e.preventDefault();
-        if (currentlyPlaying) {
-            if (currentlyPlaying.paused) {
-                currentlyPlaying.play().catch(console.error);
-                currentlyPlayingSong.classList.add('playing');
-                currentlyPlayingSong.classList.remove('paused');
-            } else {
-                currentlyPlaying.pause();
-                currentlyPlayingSong.classList.add('paused');
-                setTimeout(() => {
-                    currentlyPlayingSong.classList.remove('playing', 'paused');
-                }, 500);
-            }
+// Add scroll event listener to minimize sidebar
+let lastScrollTop = 0;
+let isScrolling;
+
+window.addEventListener('scroll', function() {
+    const sidebar = document.getElementById('sidebar');
+    const bottomPlayer = document.getElementById('bottomPlayer');
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Clear the timeout
+    window.clearTimeout(isScrolling);
+
+    if (sidebar.classList.contains('active')) {
+        if (currentScroll > lastScrollTop) {
+            // Scrolling down
+            sidebar.style.transform = `translateX(-50%) translateY(${Math.min(100, (currentScroll - lastScrollTop) / 2)}%)`;
+            
+            // Set a timeout to close the sidebar after scrolling stops
+            isScrolling = setTimeout(() => {
+                sidebar.classList.remove('active');
+                bottomPlayer.classList.remove('sidebar-active');
+                sidebar.style.transform = '';
+            }, 150);
+        } else {
+            // Scrolling up
+            sidebar.style.transform = `translateX(-50%) translateY(0)`;
         }
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+}, { passive: true });
+
+// Bottom player click handler
+document.getElementById('bottomPlayer').addEventListener('click', function(e) {
+    if (e.target.closest('.play-pause-btn')) {
+        return;
+    }
+
+    const sidebar = document.getElementById('sidebar');
+    const bottomPlayer = document.getElementById('bottomPlayer');
+
+    if (!sidebar.classList.contains('active')) {
+        const bottomPlayerColor = window.getComputedStyle(bottomPlayer).backgroundColor;
+        sidebar.style.background = bottomPlayerColor;
+        sidebar.style.transform = '';
+        sidebar.classList.add('active');
+        bottomPlayer.classList.add('sidebar-active');
+    }
+
+    e.stopPropagation();
+});
+
+// Document click handler for closing sidebar
+document.addEventListener('click', function(e) {
+    const sidebar = document.getElementById('sidebar');
+    const bottomPlayer = document.getElementById('bottomPlayer');
+
+    if (sidebar.classList.contains('active') && 
+        !sidebar.contains(e.target) && 
+        !bottomPlayer.contains(e.target)) {
+        sidebar.classList.remove('active');
+        bottomPlayer.classList.remove('sidebar-active');
+        sidebar.style.transform = '';
     }
 });
