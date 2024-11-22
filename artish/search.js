@@ -109,6 +109,12 @@ function displayResults(songs) {
         const songElement = createSongElement(song);
         songElement.style.setProperty('--animation-order', index);
         searchResults.appendChild(songElement);
+
+        const img = songElement.querySelector('img');
+        img.onload = () => {
+            const textColor = getAverageColorFromImage(img);
+            updateTextColors(songElement, textColor);
+        };
     });
 }
 
@@ -138,6 +144,52 @@ function createSongElement(song) {
     });
 
     return songElement;
+}
+
+function getAverageColorFromImage(imgElement) {
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    const width = imgElement.naturalWidth || imgElement.width;
+    const height = imgElement.naturalHeight || imgElement.height;
+
+    canvas.width = width;
+    canvas.height = height;
+    context.drawImage(imgElement, 0, 0);
+
+    const imageData = context.getImageData(0, 0, width, height).data;
+    let r = 0, g = 0, b = 0;
+    const pixelCount = imageData.length / 4;
+
+    for (let i = 0; i < imageData.length; i += 4) {
+        r += imageData[i];
+        g += imageData[i + 1];
+        b += imageData[i + 2];
+    }
+
+    r = Math.floor(r / pixelCount);
+    g = Math.floor(g / pixelCount);
+    b = Math.floor(b / pixelCount);
+
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    return brightness < 128 ? '#ffffff' : '#000000';
+}
+
+function updateTextColors(songElement, textColor) {
+    const titleElement = songElement.querySelector('.song-title');
+    const artistElement = songElement.querySelector('.song-artist');
+    
+    if (titleElement) {
+        titleElement.style.color = textColor;
+        titleElement.style.textShadow = textColor === '#ffffff' ? 
+            '0 1px 2px rgba(0, 0, 0, 0.5)' : 
+            '0 1px 2px rgba(255, 255, 255, 0.5)';
+    }
+    
+    if (artistElement) {
+        artistElement.style.color = textColor === '#ffffff' ? 
+            'rgba(255, 255, 255, 0.8)' : 
+            'rgba(0, 0, 0, 0.8)';
+    }
 }
 
 function updateBackgroundImage() {
