@@ -37,7 +37,7 @@
             text-align: center;
             transition: all 0.3s ease, all 0.3s ease-in-out;
             position: relative;
-            margin-top: 0;
+            margin: 80px auto 80px auto;
         }
 
         .container.has-results {
@@ -106,15 +106,19 @@
         #songsContainer {
             margin-top: 15px;
             opacity: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.3s ease, all 0.3s ease-in-out;
-            padding-bottom: 40px;
+            max-height: calc(100vh - 220px);
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding: 10px 0 70px 0;
+            margin-bottom: 20px;
         }
 
         #songsContainer.visible {
             opacity: 1;
-            max-height: calc(100vh - 250px);
+            max-height: calc(100vh - 220px);
             overflow-y: auto;
         }
 
@@ -317,7 +321,7 @@
             backdrop-filter: blur(10px);
             padding: 12px 0;
             z-index: 1000;
-            transition: background 0.5s ease, all 0.4s ease-in-out;
+            transition: background 0.5s ease;
         }
 
         .nav-links {
