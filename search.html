@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #7d9166;
+            background: #bcc5b0;
             color: #000000;
             display: flex;
             justify-content: center;
@@ -19,6 +19,7 @@
             width: 100%;
             overflow: hidden;
             animation: fadeIn 0.5s ease-in-out;
+            transition: background 0.5s ease, all 0.5s ease-in-out;
         }
 
         @keyframes fadeIn {
@@ -34,7 +35,7 @@
             padding: 20px;
             border-radius: 15px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease, all 0.3s ease-in-out;
             position: relative;
             margin-top: 0;
         }
@@ -56,41 +57,40 @@
 
         #searchInput {
             width: 100%;
-            padding: 10px 35px 10px 15px;
+            padding: 12px;
             border: none;
             border-radius: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            font-size: 14px;
+            font-size: 16px;
             outline: none;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease, all 0.4s ease-in-out;
+            background: #bcc5b0;
+            color: black;
         }
 
         #searchInput::placeholder {
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(0, 0, 0, 0.5);
         }
 
         #searchInput:focus {
-            background: rgba(255, 255, 255, 1);
+            background: #c5ccb9;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         #searchButton {
-            position: absolute;
-            right: 10px;
-            background: none;
+            background: #bcc5b0;
             border: none;
-            font-size: 16px;
+            border-radius: 20px;
+            padding: 8px 16px;
             cursor: pointer;
-            padding: 0;
-            color: #666;
-            transition: color 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: black;
+            font-size: 14px;
+            transition: all 0.3s ease, all 0.4s ease-in-out;
+            margin-left: 10px;
         }
 
         #searchButton:hover {
-            color: #000;
+            background: #c5ccb9;
+            border-color: rgba(0, 0, 0, 0.2);
         }
 
         h1 {
@@ -108,7 +108,7 @@
             opacity: 0;
             max-height: 0;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease, all 0.3s ease-in-out;
             padding-bottom: 40px;
         }
 
@@ -120,16 +120,18 @@
 
         #songsContainer::-webkit-scrollbar {
             width: 5px;
+            transition: all 0.3s ease, all 0.3s ease-in-out;
         }
 
         #songsContainer::-webkit-scrollbar-track {
             background: transparent;
+            transition: all 0.3s ease, all 0.3s ease-in-out;
         }
 
         #songsContainer::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 3px;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease, all 0.3s ease-in-out;
         }
 
         #songsContainer::-webkit-scrollbar-thumb:hover {
@@ -143,11 +145,12 @@
             border-radius: 12px;
             margin-bottom: 8px;
             background: transparent;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), all 0.3s ease-in-out;
             cursor: pointer;
             position: relative;
             overflow: hidden;
             border: none;
+            width: 90%;
         }
 
         .song::after {
@@ -159,7 +162,7 @@
             height: 100%;
             background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2));
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease, all 0.3s ease-in-out;
         }
 
         .song:hover {
@@ -192,7 +195,7 @@
             border-radius: 10px;
             margin-right: 12px;
             object-fit: cover;
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), all 0.3s ease-in-out;
         }
 
         .song:hover img {
@@ -244,6 +247,7 @@
             cursor: pointer;
             display: none;
             position: relative;
+            transition: all 0.3s ease, all 0.3s ease-in-out;
         }
 
         .song.playing .progress-container {
@@ -255,7 +259,7 @@
             height: 100%;
             background: black;
             border-radius: 2px;
-            transition: width 0.1s linear;
+            transition: width 0.1s linear, all 0.3s ease-in-out;
             position: relative;
         }
 
@@ -279,7 +283,7 @@
             background: #ffffff;
             border-radius: 50%;
             opacity: 0;
-            transition: all 0.2s ease;
+            transition: all 0.2s ease, all 0.3s ease-in-out;
             box-shadow: none;
         }
 
@@ -309,10 +313,11 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(125, 145, 102, 0.95);
+            background: #bcc5b0;
             backdrop-filter: blur(10px);
             padding: 12px 0;
             z-index: 1000;
+            transition: background 0.5s ease, all 0.4s ease-in-out;
         }
 
         .nav-links {
@@ -330,7 +335,7 @@
             text-decoration: none;
             font-size: 15px;
             font-weight: 500;
-            transition: color 0.3s ease, background 0.3s ease;
+            transition: color 0.3s ease, background 0.3s ease, all 0.3s ease-in-out;
             padding: 6px 12px;
             border-radius: 3px;
         }
@@ -414,7 +419,7 @@
         <div id="mainContent">
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Search for music...">
-                <button id="searchButton">🔍</button>
+                <button id="searchButton">Search</button>
             </div>
             <div id="songsContainer"></div>
         </div>
@@ -450,9 +455,44 @@
         let isDragging = false;
         let isZoomed = false;
 
+        async function getAverageColor(imgEl) {
+            return new Promise((resolve) => {
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                
+                imgEl.onload = () => {
+                    canvas.width = imgEl.width;
+                    canvas.height = imgEl.height;
+                    context.drawImage(imgEl, 0, 0);
+                    
+                    const data = context.getImageData(0, 0, canvas.width, canvas.height).data;
+                    let r = 0, g = 0, b = 0;
+                    
+                    for (let i = 0; i < data.length; i += 4) {
+                        r += data[i];
+                        g += data[i + 1];
+                        b += data[i + 2];
+                    }
+                    
+                    const pixels = data.length / 4;
+                    r = Math.round(r / pixels);
+                    g = Math.round(g / pixels);
+                    b = Math.round(b / pixels);
+                    
+                    // Make the color lighter
+                    const lightenAmount = 0.7; // Adjust this value to make colors lighter or darker
+                    r = Math.round(r + (255 - r) * lightenAmount);
+                    g = Math.round(g + (255 - g) * lightenAmount);
+                    b = Math.round(b + (255 - b) * lightenAmount);
+                    
+                    resolve([r, g, b]);
+                };
+            });
+        }
+
         async function performSearch(query) {
             try {
-                const response = await fetch('https://deezerdevs-deezer.p.rapidapi.com/search?q=' + encodeURIComponent(query), {
+                const response = await fetch(`https://deezerdevs-deezer.p.rapidapi.com/search?q=${encodeURIComponent(query)}`, {
                     method: 'GET',
                     headers: {
                         'X-RapidAPI-Key': '903be63565mshedcf652879b28c0p126a8cjsnd125834c310b',
@@ -460,8 +500,17 @@
                     }
                 });
 
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
                 const data = await response.json();
                 songsContainer.innerHTML = '';
+
+                if (!data.data || data.data.length === 0) {
+                    songsContainer.innerHTML = '<p>No results found</p>';
+                    return;
+                }
 
                 data.data.forEach((song, index) => {
                     const songId = `song${index + 1}`;
@@ -480,6 +529,19 @@
                         </div>
                         <audio class="audio-element" src="${song.preview}"></audio>
                     `;
+
+                    // Get average color from first album cover and set as background
+                    if (index === 0) {
+                        const img = new Image();
+                        img.crossOrigin = "Anonymous";
+                        img.src = song.album.cover_medium;
+                        getAverageColor(img).then(([r, g, b]) => {
+                            document.body.style.background = `rgb(${r}, ${g}, ${b})`;
+                            document.querySelector('.bottom-nav').style.background = `rgba(${r}, ${g}, ${b}, 0.95)`;
+                            document.querySelector('#searchInput').style.background = `rgba(${r}, ${g}, ${b}, 0.3)`;
+                            document.querySelector('#searchButton').style.background = `rgba(${r}, ${g}, ${b}, 0.4)`;
+                        });
+                    }
 
                     let clickTimeout;
 
@@ -507,10 +569,12 @@
 
                     songsContainer.appendChild(songElement);
                 });
+                
                 document.querySelector('.container').classList.add('has-results');
                 songsContainer.classList.add('visible');
             } catch (error) {
                 console.error('Error:', error);
+                songsContainer.innerHTML = '<p>Error fetching results. Please try again.</p>';
             }
         }
 
