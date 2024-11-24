@@ -33,6 +33,39 @@
         }
       }
 
+      @keyframes slideInFromRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInFromLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes fadeInScale {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
       .container {
         max-width: 450px;
         width: 100%;
@@ -68,7 +101,8 @@
         align-items: center;
         gap: 8px;
         margin: 20px 0;
-        width: 100%;
+        margin-left: 10%;
+        width: 80%;
         max-width: 250px;
         position: relative;
       }
@@ -402,6 +436,7 @@
 
       .about-section.active {
         display: block;
+        animation: slideInFromRight 0.5s ease forwards;
       }
 
       .about-section h2 {
@@ -446,7 +481,7 @@
       .home-section.active {
         opacity: 1;
         transform: translateY(0);
-        display: block;
+        animation: fadeInScale 0.5s ease forwards;
       }
 
       .home-title {
@@ -531,10 +566,11 @@
       #mainContent {
         display: block;
         margin-top: -40px;
+        opacity: 0;
       }
 
-      #mainContent.hidden {
-        display: none;
+      #mainContent.active {
+        animation: slideInFromLeft 0.5s ease forwards;
       }
 
       .search-title {
@@ -574,110 +610,40 @@
 
       @media screen and (max-width: 768px) {
         .container {
-          width: 95%;
-          padding: 15px;
-          margin: 60px auto;
-          overflow-y: auto;
-          height: auto;
-          max-height: 85vh;
-        }
-
-        #mainContent {
-          padding: 10px;
-        }
-
-        .search-fixed {
-          width: 95%;
-          padding: 15px;
-        }
-
-        #songsContainer {
-          margin-top: 160px;
-          max-height: calc(100vh - 280px);
-        }
-
-        .search-container {
-          width: 95%;
-          margin: 15px auto;
-        }
-
-        #searchInput {
-          font-size: 14px;
-          padding: 10px 15px;
-          padding-right: 90px;
-        }
-
-        #searchButton {
-          padding: 8px 15px;
-          font-size: 14px;
-        }
-
-        .search-title {
-          font-size: 1.5em;
-          margin-bottom: 10px;
-        }
-      }
-
-      @media screen and (max-width: 480px) {
-        .container {
-          width: 100%;
-          padding: 10px;
-          margin: 40px auto;
-        }
-
-        #mainContent {
-          padding: 5px;
-        }
-
-        .search-fixed {
-          width: 100%;
-          padding: 10px;
-        }
-
-        #songsContainer {
-          margin-top: 150px;
-          max-height: calc(100vh - 260px);
-        }
-
-        .search-container {
-          width: 100%;
-          margin: 10px auto;
-        }
-
-        #searchInput {
-          font-size: 13px;
-          padding: 8px 12px;
-          padding-right: 80px;
-        }
-
-        #searchButton {
-          padding: 6px 12px;
-          font-size: 13px;
-          right: 3px;
-        }
-
-        .search-title {
-          font-size: 1.3em;
-          margin-bottom: 8px;
-        }
-      }
-
-      @media screen and (max-width: 600px) {
-        .container {
           max-width: 100%;
-          margin: 10px;
-          padding: 20px;
+          margin: 40px 15px;
+          padding: 15px;
+        }
+
+        h1 {
+          font-size: 1.5em;
+          margin-bottom: 20px;
+        }
+
+        .search-container {
+          max-width: 100%;
+          padding: 0 10px;
+        }
+
+        #searchInput {
+          padding: 10px;
+          font-size: 14px;
+        }
+
+        #searchButton {
+          padding: 10px 14px;
+          font-size: 13px;
         }
 
         .song {
-          padding: 10px;
-          width: 90%;
+          width: 95%;
+          padding: 8px 10px;
+          margin-bottom: 6px;
         }
 
         .song img {
           width: 45px;
           height: 45px;
-          margin-right: 12px;
         }
 
         .song-title {
@@ -685,22 +651,99 @@
         }
 
         .song-artist {
-          font-size: 0.8em;
+          font-size: 0.75em;
         }
 
-        .progress-container {
-          width: calc(100% - 57px);
+        #songsContainer {
+          margin-top: 20px;
+          padding: 5px 0 60px 0;
+        }
+
+        .bottom-nav {
+          padding: 8px 0;
+        }
+
+        .nav-links {
+          gap: 20px;
+        }
+
+        .nav-links a {
+          font-size: 13px;
+          padding: 5px 10px;
+        }
+
+        .about-section {
+          padding: 15px;
+          max-width: 100%;
+        }
+
+        .about-content {
+          padding: 15px;
+          font-size: 0.9em;
+        }
+
+        #mainContent {
+          margin-top: -20px;
         }
       }
 
-      @keyframes slideUp {
-        from {
-          transform: translate(-50%, 20px);
-          opacity: 0;
+      @media screen and (max-width: 480px) {
+        .container {
+          margin: 20px 10px;
+          padding: 10px;
         }
-        to {
-          transform: translate(-50%, 0);
-          opacity: 1;
+
+        h1 {
+          font-size: 1.3em;
+        }
+
+        .search-container {
+          gap: 5px;
+        }
+
+        #searchInput {
+          padding: 8px;
+        }
+
+        #searchButton {
+          padding: 8px 12px;
+        }
+
+        .song {
+          width: 100%;
+        }
+
+        .song img {
+          width: 40px;
+          height: 40px;
+        }
+
+        .nav-links {
+          gap: 15px;
+        }
+
+        .about-content {
+          padding: 10px;
+          font-size: 0.85em;
+        }
+
+        .progress-container {
+          margin-left: 15%;
+          width: calc(100% - 55px);
+        }
+      }
+
+      @media screen and (max-height: 600px) {
+        .container {
+          margin: 10px auto;
+        }
+
+        #songsContainer {
+          max-height: calc(100vh - 180px);
+        }
+
+        h1 {
+          margin-bottom: 15px;
         }
       }
     </style>
