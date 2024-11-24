@@ -176,6 +176,24 @@ html {
     }
 }
 
+.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  background: rgba(255,255,255,0.2);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background 0.3s ease;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.3);
+}
+
 @media (max-width: 600px) {
   .song {
     flex-direction: row;

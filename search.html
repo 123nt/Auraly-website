@@ -3,16 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Auraly</title>
-        <!-- Adaptive Favicon -->
-        <link rel="icon" type="image/svg+xml" href="icons/adaptive-favicon.svg">
-    
-
-    <!-- Favicon for all devices and browsers -->
-    <link rel="icon" type="image/svg+xml" href="icons/icons8-logo-500.svg">
-    <link rel="icon" type="image/png" href="icons/icons8-logo-500.png">
-    <link rel="apple-touch-icon" href="icons/icons8-logo-500.png">
-    
+    <title>Auraly - Your Musical Journey</title>
     <style>
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -86,7 +77,6 @@
         transition: all 0.3s ease, all 0.3s ease-in-out;
         position: relative;
         margin: 80px auto 80px auto;
-        opacity: 1;
       }
 
       .container.has-results {
@@ -494,31 +484,11 @@
       }
 
       .home-title {
-        font-size: 2.5rem;
-        font-weight: 600;
-        margin-bottom: 1.5rem;
-        color: #1a1a1a;
-        letter-spacing: 0.5px;
-        text-align: center;
-        position: relative;
-        padding-bottom: 0.5rem;
-      }
-
-      .home-title::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 3px;
-        background: #1a1a1a;
-        border-radius: 2px;
-      }
-
-      .home-title span {
-        color: #666666;
-        font-weight: 700;
+        font-size: 2.5em;
+        margin-bottom: 15px;
+        color: #000000;
+        text-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
+        animation: fadeInDown 0.8s ease-out;
       }
 
       .home-subtitle {
@@ -526,27 +496,35 @@
         color: #bcc5b0;
         margin-bottom: 20px;
         line-height: 1.4;
-        animation: fadeInUp 0.8s ease-out;
+        animation: fadeInUp 0.8s ease-out 0.3s both;
       }
 
-      .welcome-text {
-        max-width: 800px;
-        margin: 0 auto;
-        text-align: center;
-        padding: 20px;
+      .playlist-btn {
+        display: inline-block;
+        padding: 12px 25px;
+        background: var(--theme-color);
+        filter: brightness(88%);
+        color: #000000;
+        text-decoration: none;
+        border-radius: 25px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        margin: 10px 5px;
       }
 
-      .welcome-text h1 {
-        font-size: 2.5em;
-        color: #1a1a1a;
-        margin-bottom: 15px;
+      .playlist-btn:hover {
+        filter: brightness(82%);
       }
 
-      .welcome-text p {
-        font-size: 1.1em;
-        color: #333;
-        line-height: 1.6;
-        margin-bottom: 15px;
+      .playlist-link {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .playlist-link:hover {
+        text-decoration: none;
       }
 
       .music-icon {
@@ -618,218 +596,149 @@
         transition: all 0.3s ease;
       }
 
-      /* Extra Large screens */
-      @media screen and (min-width: 1400px) {
-        .playlist-categories {
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 0.8rem;
-          padding: 0.5rem;
-          width: 100%;
-          margin: 2rem auto;
-        }
-
-        .playlist-category {
-          padding: 0.6rem 0.8rem;
-          min-height: 45px;
-        }
-
-        .playlist-category i {
-          width: 32px;
-          height: 32px;
-          font-size: 1rem;
-        }
-
-        .playlist-category span {
-          font-size: 0.9rem;
-        }
+      .playlist-section {
+        text-align: center;
+        padding: 20px;
+        background: var(--theme-color);
+        filter: brightness(93%);
+        border-radius: 15px;
+        margin: 20px auto;
+        max-width: 800px;
+        transition: all 0.3s ease;
       }
 
-      /* Large screens */
-      @media screen and (min-width: 1024px) and (max-width: 1399px) {
-        .playlist-categories {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 1.2rem;
-          max-width: 1000px;
-        }
-
-        .playlist-category {
-          padding: 1.2rem 1.5rem;
-          min-height: 70px;
-          gap: 1.2rem;
-        }
-
-        .playlist-category i {
-          width: 50px;
-          height: 50px;
-          font-size: 1.5rem;
-        }
-
-        .playlist-category span {
-          font-size: 1.2rem;
-        }
+      .explore-section {
+        padding: 40px 20px;
+        text-align: center;
+        max-width: 1000px;
+        margin: 0 auto;
+        animation: fadeIn 0.5s ease;
       }
 
-      /* Medium screens */
-      @media screen and (min-width: 768px) and (max-width: 1023px) {
-        .playlist-categories {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 1rem;
-        }
-
-        .playlist-category {
-          padding: 1rem 1.2rem;
-          min-height: 60px;
-        }
-
-        .playlist-category i {
-          width: 40px;
-          height: 40px;
-          font-size: 1.2rem;
-        }
-
-        .playlist-category span {
-          font-size: 1rem;
-        }
+      .explore-content {
+        background: var(--theme-color);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
       }
 
-      /* Small screens */
-      @media screen and (max-width: 767px) {
-        .playlist-categories {
-          grid-template-columns: 1fr;
-          gap: 0.6rem;
-          padding: 0.3rem;
-          margin-bottom: 4%;
-        }
-
-        .playlist-category {
-          padding: 0.5rem 0.8rem;
-          min-height: 40px;
-        }
-
-        .playlist-category i {
-          width: 28px;
-          height: 28px;
-          font-size: 0.9rem;
-        }
-
-        .playlist-category span {
-          font-size: 0.85rem;
-        }
+      .explore-content h2 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        background: linear-gradient(45deg, #2c2c2c, #1a1a1a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
       }
 
-      /* Extra small screens */
-      @media screen and (max-width: 360px) {
-        .playlist-category {
-          padding: 0.4rem 0.6rem;
-          min-height: 35px;
-        }
-
-        .playlist-category i {
-          width: 24px;
-          height: 24px;
-          font-size: 0.8rem;
-        }
-
-        .playlist-category span {
-          font-size: 0.8rem;
-        }
+      .explore-description {
+        font-size: 1.1em;
+        margin: 20px auto 40px;
+        max-width: 600px;
+        color: rgba(0, 0, 0, 0.7);
+        line-height: 1.6;
       }
 
-      /* Large screens (Laptops/Desktops) */
-      @media screen and (min-width: 1200px) {
+      .playlist-categories {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 25px;
+        margin-top: 30px;
+        padding: 10px;
+      }
+
+      @media screen and (min-width: 1024px) {
         .playlist-categories {
           grid-template-columns: repeat(2, 1fr);
-          max-width: 1000px;
-          gap: 1.2rem;
-          padding: 0.8rem;
-        }
-
-        .playlist-category {
-          padding: 1rem 1.2rem;
-          min-height: 60px;
-          gap: 1rem;
-        }
-
-        .playlist-category i {
-          width: 40px;
-          height: 40px;
-          font-size: 1.2rem;
-        }
-
-        .playlist-category span {
-          font-size: 1.1rem;
+          max-width: 1200px;
+          margin: 30px auto;
         }
       }
 
-      /* Medium screens (Tablets) */
-      @media screen and (min-width: 768px) and (max-width: 1199px) {
-        .playlist-categories {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 1rem;
-          padding: 0.6rem;
-        }
+      .playlist-category {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+      }
 
-        .playlist-category {
-          padding: 1rem 1.2rem;
-          min-height: 60px;
-        }
+      .playlist-category::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          45deg,
+          rgba(255,255,255,0.1),
+          rgba(255,255,255,0)
+        );
+        border-radius: 16px;
+        z-index: 0;
+      }
 
-        .playlist-category i {
-          width: 40px;
-          height: 40px;
-          font-size: 1.2rem;
-        }
+      .playlist-category:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
 
-        .playlist-category span {
-          font-size: 1.1rem;
+      .playlist-category i {
+        font-size: 2.5em;
+        margin-bottom: 15px;
+        color: #2c2c2c;
+        position: relative;
+        z-index: 1;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .playlist-category span {
+        font-size: 1.2em;
+        font-weight: 600;
+        position: relative;
+        z-index: 1;
+        color: #2c2c2c;
+      }
+
+      .playlist-category::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+        transform: translateY(4px);
+        transition: transform 0.3s ease;
+      }
+
+      .playlist-category:hover::after {
+        transform: translateY(0);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
       }
 
-      /* Small screens (Mobile) */
-      @media screen and (max-width: 767px) {
-        .playlist-categories {
-          grid-template-columns: 1fr;
-          gap: 0.8rem;
-          padding: 0.4rem;
-          margin-bottom: 4%;
-        }
-
-        .playlist-category {
-          padding: 0.7rem 0.9rem;
-          min-height: 45px;
-        }
-
-        .playlist-category i {
-          width: 32px;
-          height: 32px;
-          font-size: 1rem;
-        }
-
-        .playlist-category span {
-          font-size: 0.9rem;
-        }
-      }
-
-      /* Extra small screens */
-      @media screen and (max-width: 360px) {
-        .playlist-category {
-          padding: 0.6rem 0.8rem;
-          min-height: 40px;
-        }
-
-        .playlist-category i {
-          width: 28px;
-          height: 28px;
-          font-size: 0.9rem;
-        }
-
-        .playlist-category span {
-          font-size: 0.85rem;
-        }
-      }
-
-      /* Tablet devices */
-      @media screen and (max-width: 1024px) {
+      @media screen and (max-width: 768px) {
         .container {
           max-width: 100%;
           margin: 40px 15px;
@@ -908,10 +817,34 @@
         }
 
         .playlist-categories {
-          gap: 1.5rem;
+          grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .explore-section {
+          padding: 20px 10px;
+        }
+        
+        .explore-content {
+          padding: 25px 15px;
+        }
+
+        .explore-content h2 {
+          font-size: 2em;
+        }
+
+        .playlist-category {
+          padding: 20px 15px;
+        }
+
+        .playlist-category i {
+          font-size: 2em;
+        }
+
+        .playlist-category span {
+          font-size: 1.1em;
         }
       }
-        
+
       @media screen and (max-width: 480px) {
         .container {
           margin: 20px 10px;
@@ -980,23 +913,30 @@
         top: 20px;
         left: 20px;
         z-index: 1000;
-        width: 40px;
-        height: 40px;
+        width: 60px;
+        height: 60px;
         display: flex;
         align-items: center;
         justify-content: center;
+        background: transparent;
+        transition: all 0.3s ease;
         cursor: pointer;
-        transition: transform 0.2s ease;
-      }
-
-      .app-logo:hover {
-        transform: scale(1.05);
+        padding: 8px;
       }
 
       .app-logo img {
         width: 100%;
         height: 100%;
         object-fit: contain;
+        position: relative;
+        z-index: 2;
+        filter: brightness(0.2);
+        transition: transform 0.3s ease, filter 0.3s ease;
+      }
+
+      .app-logo:hover img {
+        transform: translateY(-2px) rotate(5deg);
+        filter: brightness(0);
       }
 
       /* Tablet devices */
@@ -1027,18 +967,258 @@
           padding: 5px;
         }
       }
+
+      /* Splash Screen Styles */
+      .splash-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.5s ease-out;
+      }
+
+      .splash-screen.fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .splash-logo {
+        width: 120px;
+        height: 120px;
+        position: relative;
+        animation: logoAnimation 2s ease-in-out forwards;
+      }
+
+      .splash-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: brightness(0.2);
+      }
+
+      @keyframes logoAnimation {
+        0% {
+          transform: scale(0.3);
+          opacity: 0;
+        }
+        40% {
+          transform: scale(1.2);
+          opacity: 0.7;
+        }
+        60% {
+          transform: scale(0.9);
+          opacity: 0.8;
+        }
+        80% {
+          transform: scale(1.1);
+          opacity: 0.9;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .splash-text {
+        position: absolute;
+        bottom: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 24px;
+        font-weight: 500;
+        color: #2c2c2c;
+        opacity: 0;
+        animation: textFadeIn 1s ease-in-out 1s forwards;
+      }
+
+      @keyframes textFadeIn {
+        from {
+          opacity: 0;
+          transform: translate(-50%, 20px);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, 0);
+        }
+      }
     </style>
   </head>
   <body>
+    <script>
+      // Handle back button functionality
+      window.addEventListener('popstate', function(event) {
+        if (event.state) {
+          showSection(event.state.section);
+        } else {
+          history.back();
+        }
+      });
+
+      // Modify showSection to use history API
+      function showSection(section) {
+        updateThemeColor();
+        const sections = ['home', 'search', 'about', 'explore'];
+        sections.forEach(s => {
+          const elem = document.getElementById(s + 'Section');
+          if (elem) {
+            elem.style.display = s === section ? 'block' : 'none';
+          }
+        });
+
+        // Update history state
+        history.pushState({ section: section }, '', '#' + section);
+
+        // Update active state of navigation buttons
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.getAttribute('data-section') === section) {
+            btn.classList.add('active');
+          }
+        });
+
+        // Reset container class
+        const container = document.querySelector('.container');
+        container.classList.remove('has-results');
+        
+        // Clear search results if moving away from search section
+        if (section !== 'search') {
+          const searchResults = document.getElementById('searchResults');
+          if (searchResults) {
+            searchResults.innerHTML = '';
+          }
+        }
+      }
+
+      function generatePastelColor() {
+        // Predefined aesthetic color combinations (hue, saturation, lightness)
+        const aestheticColors = [
+          [25, 35, 95],   // Soft peach
+          [180, 25, 93],  // Pale cyan
+          [280, 20, 94],  // Soft lavender
+          [150, 30, 94],  // Mint green
+          [330, 25, 94],  // Light pink
+          [45, 30, 94],   // Cream yellow
+          [200, 25, 95],  // Baby blue
+          [0, 25, 95],    // Shell pink
+          [80, 25, 94],   // Sage green
+          [320, 20, 95]   // Rose mist
+        ];
+        
+        // Pick a random color combination
+        const color = aestheticColors[Math.floor(Math.random() * aestheticColors.length)];
+        return `hsl(${color[0]}, ${color[1]}%, ${color[2]}%)`;
+      }
+
+      function updateThemeColor() {
+        const newColor = generatePastelColor();
+        document.body.style.backgroundColor = newColor;
+        document.documentElement.style.setProperty('--theme-color', newColor);
+        
+        const elements = document.querySelectorAll('#searchInput, #searchButton, .nav-btn, .nav-links');
+        elements.forEach(el => {
+          el.style.backgroundColor = newColor;
+        });
+
+        const playlistContainers = document.querySelectorAll('.playlist-container, .playlist-section');
+        playlistContainers.forEach(el => {
+          el.style.backgroundColor = newColor;
+          // The filter: brightness(93%) is handled in CSS
+        });
+
+        const playlistButtons = document.querySelectorAll('.playlist-btn, .playlist-link');
+        playlistButtons.forEach(el => {
+          el.style.backgroundColor = newColor;
+          // The filter: brightness(88%) is handled in CSS
+        });
+      }
+
+      // Original showSection function with color update
+      function showSection(section) {
+        updateThemeColor();
+        const sections = ['home', 'search', 'about', 'explore'];
+        sections.forEach(s => {
+          const elem = document.getElementById(s + 'Section');
+          if (elem) {
+            elem.style.display = s === section ? 'block' : 'none';
+          }
+        });
+
+        // Update active state of navigation buttons
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.getAttribute('data-section') === section) {
+            btn.classList.add('active');
+          }
+        });
+
+        // Reset container class
+        const container = document.querySelector('.container');
+        container.classList.remove('has-results');
+        
+        // Clear search results if moving away from search section
+        if (section !== 'search') {
+          const searchResults = document.getElementById('searchResults');
+          if (searchResults) {
+            searchResults.innerHTML = '';
+          }
+        }
+      }
+
+      // Modify performSearch to update colors
+      const originalPerformSearch = window.performSearch;
+      window.performSearch = function(query) {
+        updateThemeColor();
+        return originalPerformSearch(query);
+      };
+    </script>
+    <div class="splash-screen" id="splashScreen">
+      <div class="splash-logo">
+        <img src="icons/icons8-logo-500.svg" alt="Auraly Logo">
+      </div>
+      <div class="splash-text">Welcome to Auraly</div>
+    </div>
     <div class="app-logo" onclick="showSection('home')">
       <img src="icons/icons8-logo-500.svg" alt="Auraly Logo">
     </div>
     <div class="container">
       <div id="homeSection" class="home-section">
-        <div class="welcome-text">
-          <h1>Welcome to Auraly</h1>
-          <p>Discover the perfect soundtrack for your moment. Search through millions of tracks and find your next favorite song.</p>
-          <p>Every beat tells a story, every rhythm holds a secret. Discover your perfect melody in our musical universe where unknown tracks become unforgettable memories.</p>
+        <i class="fas fa-music music-icon"></i>
+        <h1 class="home-title">Welcome to Auraly</h1>
+        <p>Every beat tells a story, every rhythm holds a secret. Discover your perfect melody in our musical universe where unknown tracks become unforgettable memories.</p>
+        <p>Want to explore my curated collection? My personal playlists are just a click away...</p>
+        <button onclick="showSection('explore')" class="playlist-btn">Explore Playlists</button>
+      </div>
+
+      <div id="exploreSection" class="explore-section">
+        <div class="explore-content">
+          <h2>My Personal Playlists</h2>
+          <p class="explore-description">Dive into my curated collection of music from around the world. Each playlist tells a unique story through carefully selected tracks that represent different cultures and genres.</p>
+          
+          <div class="playlist-categories">
+            <a href="artish/nepaliplaylist.html" class="playlist-category">
+              <i class="fas fa-mountain"></i>
+              <span>Nepali Vibes</span>
+            </a>
+            <a href="artish/country-playlist.html" class="playlist-category">
+              <i class="fas fa-guitar"></i>
+              <span>Country Roads</span>
+            </a>
+            <a href="artish/uk-playlist.html" class="playlist-category">
+              <i class="fas fa-crown"></i>
+              <span>British Beats</span>
+            </a>
+            <a href="artish/hip-hop.html" class="playlist-category">
+              <i class="fas fa-record-vinyl"></i>
+              <span>Hip Hop Heat</span>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -1322,10 +1502,12 @@
         const homeSection = document.getElementById("homeSection");
         const mainContent = document.getElementById("mainContent");
         const aboutSection = document.getElementById("aboutSection");
+        const exploreSection = document.getElementById("exploreSection");
         
         homeSection.classList.remove("active");
         mainContent.classList.remove("active");
         aboutSection.classList.remove("active");
+        exploreSection.classList.remove("active");
 
         // Add a small delay before showing the new section
         setTimeout(() => {
@@ -1333,6 +1515,7 @@
           homeSection.style.display = "none";
           mainContent.style.display = "none";
           aboutSection.style.display = "none";
+          exploreSection.style.display = "none";
 
           // Show selected section and update nav link
           switch (section) {
@@ -1351,6 +1534,11 @@
               document.getElementById("songsContainer").innerHTML = "";
               document.getElementById("searchInput").value = "";
               break;
+            case "explore":
+              exploreSection.style.display = "block";
+              exploreSection.offsetHeight;
+              exploreSection.classList.add("active");
+              break;
             default:
               mainContent.style.display = "block";
               mainContent.offsetHeight;
@@ -1364,6 +1552,23 @@
       document.addEventListener("DOMContentLoaded", () => {
         // Set home as active by default
         showSection('home');
+
+        // Handle splash screen for first visit
+        const hasVisited = localStorage.getItem('hasVisitedAuraly');
+        const splashScreen = document.getElementById('splashScreen');
+        
+        if (hasVisited) {
+          // Hide splash screen immediately if not first visit
+          splashScreen.style.display = 'none';
+        } else {
+          // Show splash screen animation on first visit
+          setTimeout(() => {
+            splashScreen.classList.add('fade-out');
+            // Set visited flag in localStorage
+            localStorage.setItem('hasVisitedAuraly', 'true');
+          }, 2500);
+        }
+
         const searchInput = document.getElementById("searchInput");
         const searchButton = document.getElementById("searchButton");
 
@@ -1378,6 +1583,12 @@
             if (query) performSearch(query);
           }
         });
+
+        // Hide splash screen after 2 seconds
+        // const splashScreen = document.getElementById('splashScreen');
+        // setTimeout(() => {
+        //   splashScreen.classList.add('fade-out');
+        // }, 2000);
       });
     </script>
   </body>
