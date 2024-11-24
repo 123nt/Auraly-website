@@ -384,27 +384,27 @@
       .nav-links {
         display: flex;
         justify-content: center;
-        align-items: center;
-        gap: 35px;
-        margin: 0;
+        width: 100%;
         padding: 0;
+        margin: 0;
         list-style: none;
+        gap: 35px;
       }
 
       .nav-links a {
-        color: #000000;
+        color: inherit;
         text-decoration: none;
-        font-size: 15px;
-        font-weight: 500;
-        transition: color 0.3s ease, background 0.3s ease;
         padding: 6px 12px;
         border-radius: 3px;
+        transition: all 0.3s ease;
+        font-size: 15px;
+        font-weight: 500;
       }
 
       .nav-links a:hover,
       .nav-links a.active {
-        color: #000000;
-        background: rgba(0, 0, 0, 0.1);
+        background-color: rgba(0, 0, 0, 0.1);
+        color: rgba(0, 0, 0, 0.7);
       }
 
       .nav-btn {
@@ -898,23 +898,25 @@
       let currentlyPlayingAudio = null;
       let currentlyPlayingContainer = null;
 
-      function getLightColor(r, g, b) {
-        // Predefined light colors that exclude pink, black, and light green
+      function getLightColor() {
+        // Your specified colors for page background
         const lightColors = [
-          { r: 230, g: 230, b: 250 },  // Lavender
-          { r: 255, g: 240, b: 200 },  // Light Yellow
-          { r: 230, g: 240, b: 255 },  // Light Blue
-          { r: 255, g: 228, b: 196 },  // Bisque
-          { r: 255, g: 218, b: 185 },  // Peach
-          { r: 230, g: 230, b: 230 },  // Light Gray
-          { r: 255, g: 235, b: 205 },  // Blanched Almond
-          { r: 240, g: 248, b: 255 },  // Alice Blue
-          { r: 255, g: 250, b: 205 },  // Lemon Chiffon
-          { r: 255, g: 228, b: 225 }   // Misty Rose
+          '#A0937D', '#D2E0FB', '#DEE5D4', '#CCE0AC', '#CCD5AE',
+          '#E0E5B6', '#E7D4B5', '#F6E6CB', '#B5C18E', '#E5DDC5',
+          '#CCD3CA', '#D7E4C0', '#C6DCBA', '#BBC3A4', '#FFF8E3',
+          '#F5EEE6', '#EAECCC', '#DED0B6', '#E5D4FF', '#F7EFE5',
+          '#D6C7AE', '#BFB29E'
         ];
-        
-        // Get a random light color
         return lightColors[Math.floor(Math.random() * lightColors.length)];
+      }
+
+      function hexToRgb(hex) {
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16)
+        } : null;
       }
 
       async function performSearch(query) {
@@ -942,10 +944,23 @@
           );
           const data = await response.json();
           
-          // Change page background color
+          // Change page background color using your specified colors
           const newColor = getLightColor();
           document.body.style.transition = 'background-color 0.5s ease-in-out';
-          document.body.style.backgroundColor = `rgba(${newColor.r}, ${newColor.g}, ${newColor.b}, 1)`;
+          document.body.style.backgroundColor = newColor;
+          document.querySelector('.bottom-nav').style.background = newColor;
+          document.querySelector('#searchInput').style.background = newColor;
+          document.querySelector('#searchButton').style.background = newColor;
+          
+          // Make playlist button darker version of the same color
+          const playlistButtons = document.querySelectorAll('.playlist-btn');
+          playlistButtons.forEach(btn => {
+            btn.style.transition = 'background-color 0.5s ease-in-out';
+            // Convert hex to RGB, darken it, and convert back to hex
+            const rgb = hexToRgb(newColor);
+            const darkerColor = `rgb(${Math.max(0, rgb.r - 30)}, ${Math.max(0, rgb.g - 30)}, ${Math.max(0, rgb.b - 30)})`;
+            btn.style.backgroundColor = darkerColor;
+          });
           
           songsContainer.innerHTML = "";
 
@@ -1079,15 +1094,35 @@
       }
 
       function showSection(section) {
+        // Update theme color
+        const newColor = getLightColor();
+        document.body.style.backgroundColor = newColor;
+        document.querySelector('.bottom-nav').style.background = newColor;
+        document.querySelector('#searchInput').style.background = newColor;
+        document.querySelector('#searchButton').style.background = newColor;
+
+        // Make playlist button darker version of the same color
+        const playlistButtons = document.querySelectorAll('.playlist-btn');
+        playlistButtons.forEach(btn => {
+          btn.style.transition = 'background-color 0.5s ease-in-out';
+          const rgb = hexToRgb(newColor);
+          const darkerColor = `rgb(${Math.max(0, rgb.r - 30)}, ${Math.max(0, rgb.g - 30)}, ${Math.max(0, rgb.b - 30)})`;
+          btn.style.backgroundColor = darkerColor;
+        });
+
+        // Update nav links color
+        const navLinks = document.querySelectorAll(".nav-links a");
+        navLinks.forEach(link => {
+          link.style.transition = 'all 0.3s ease';
+          link.style.color = 'inherit';
+          link.classList.remove("active");
+        });
+
+        // First remove active classes from all sections
         const homeSection = document.getElementById("homeSection");
         const mainContent = document.getElementById("mainContent");
         const aboutSection = document.getElementById("aboutSection");
-        const navLinks = document.querySelectorAll(".nav-links a");
-
-        // Remove active class from all nav links
-        navLinks.forEach(link => link.classList.remove("active"));
-
-        // First remove active classes from all sections
+        
         homeSection.classList.remove("active");
         mainContent.classList.remove("active");
         aboutSection.classList.remove("active");
