@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Music Search</title>
+    <title>Auraly - Your Musical Journey</title>
     <style>
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -77,6 +77,7 @@
         transition: all 0.3s ease, all 0.3s ease-in-out;
         position: relative;
         margin: 80px auto 80px auto;
+        opacity: 1;
       }
 
       .container.has-results {
@@ -396,7 +397,7 @@
         padding: 10px 20px;
         border-radius: 3px;
         transition: all 0.3s ease;
-        font-size: 20px;
+        font-size: 14px;
         font-weight: 500;
       }
 
@@ -607,6 +608,129 @@
         transition: all 0.3s ease;
       }
 
+      .explore-section {
+        padding: 40px 20px;
+        text-align: center;
+        max-width: 1000px;
+        margin: 0 auto;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .explore-content {
+        background: var(--theme-color);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .explore-content h2 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        background: linear-gradient(45deg, #2c2c2c, #1a1a1a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .explore-description {
+        font-size: 1.1em;
+        margin: 20px auto 40px;
+        max-width: 600px;
+        color: rgba(0, 0, 0, 0.7);
+        line-height: 1.6;
+      }
+
+      .playlist-categories {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+        padding: 10px;
+      }
+
+      .playlist-category {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+      }
+
+      .playlist-category::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          45deg,
+          rgba(255,255,255,0.1),
+          rgba(255,255,255,0)
+        );
+        border-radius: 16px;
+        z-index: 0;
+      }
+
+      .playlist-category:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      .playlist-category i {
+        font-size: 2.5em;
+        margin-bottom: 15px;
+        color: #2c2c2c;
+        position: relative;
+        z-index: 1;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .playlist-category span {
+        font-size: 1.2em;
+        font-weight: 600;
+        position: relative;
+        z-index: 1;
+        color: #2c2c2c;
+      }
+
+      .playlist-category::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+        transform: translateY(4px);
+        transition: transform 0.3s ease;
+      }
+
+      .playlist-category:hover::after {
+        transform: translateY(0);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
       @media screen and (max-width: 768px) {
         .container {
           max-width: 100%;
@@ -684,6 +808,34 @@
         #mainContent {
           margin-top: -20px;
         }
+
+        .playlist-categories {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .explore-section {
+          padding: 20px 10px;
+        }
+        
+        .explore-content {
+          padding: 25px 15px;
+        }
+
+        .explore-content h2 {
+          font-size: 2em;
+        }
+
+        .playlist-category {
+          padding: 20px 15px;
+        }
+
+        .playlist-category i {
+          font-size: 2em;
+        }
+
+        .playlist-category span {
+          font-size: 1.1em;
+        }
       }
 
       @media screen and (max-width: 480px) {
@@ -709,7 +861,9 @@
         }
 
         .song {
-          width: 100%;
+          width: 70%;
+          margin-left: 7%;
+
         }
 
         .song img {
@@ -719,6 +873,7 @@
 
         .nav-links {
           gap: 15px;
+          font-size: 15px;
         }
 
         .about-content {
@@ -745,99 +900,105 @@
           margin-bottom: 15px;
         }
       }
-    </style>
-  </head>
-  <body>
-    <script>
-      function generatePastelColor() {
-        // Predefined aesthetic color combinations (hue, saturation, lightness)
-        const aestheticColors = [
-          [25, 35, 95],   // Soft peach
-          [180, 25, 93],  // Pale cyan
-          [280, 20, 94],  // Soft lavender
-          [150, 30, 94],  // Mint green
-          [330, 25, 94],  // Light pink
-          [45, 30, 94],   // Cream yellow
-          [200, 25, 95],  // Baby blue
-          [0, 25, 95],    // Shell pink
-          [80, 25, 94],   // Sage green
-          [320, 20, 95]   // Rose mist
-        ];
-        
-        // Pick a random color combination
-        const color = aestheticColors[Math.floor(Math.random() * aestheticColors.length)];
-        return `hsl(${color[0]}, ${color[1]}%, ${color[2]}%)`;
+
+      .app-logo {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1000;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        padding: 8px;
       }
 
-      function updateThemeColor() {
-        const newColor = generatePastelColor();
-        document.body.style.backgroundColor = newColor;
-        document.documentElement.style.setProperty('--theme-color', newColor);
-        
-        const elements = document.querySelectorAll('#searchInput, #searchButton, .nav-btn, .nav-links');
-        elements.forEach(el => {
-          el.style.backgroundColor = newColor;
-        });
-
-        const playlistContainers = document.querySelectorAll('.playlist-container, .playlist-section');
-        playlistContainers.forEach(el => {
-          el.style.backgroundColor = newColor;
-          // The filter: brightness(93%) is handled in CSS
-        });
-
-        const playlistButtons = document.querySelectorAll('.playlist-btn, .playlist-link');
-        playlistButtons.forEach(el => {
-          el.style.backgroundColor = newColor;
-          // The filter: brightness(88%) is handled in CSS
-        });
+      .app-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        position: relative;
+        z-index: 2;
+        filter: brightness(0.2);
+        transition: transform 0.3s ease, filter 0.3s ease;
       }
 
-      // Original showSection function with color update
-      function showSection(section) {
-        updateThemeColor();
-        const sections = ['home', 'search', 'playlist'];
-        sections.forEach(s => {
-          const elem = document.getElementById(s + 'Section');
-          if (elem) {
-            elem.style.display = s === section ? 'block' : 'none';
-          }
-        });
+      .app-logo:hover img {
+        transform: translateY(-2px) rotate(5deg);
+        filter: brightness(0);
+      }
 
-        // Update active state of navigation buttons
-        document.querySelectorAll('.nav-btn').forEach(btn => {
-          btn.classList.remove('active');
-          if (btn.getAttribute('data-section') === section) {
-            btn.classList.add('active');
-          }
-        });
-
-        // Reset container class
-        const container = document.querySelector('.container');
-        container.classList.remove('has-results');
-        
-        // Clear search results if moving away from search section
-        if (section !== 'search') {
-          const searchResults = document.getElementById('searchResults');
-          if (searchResults) {
-            searchResults.innerHTML = '';
-          }
+      /* Tablet devices */
+      @media screen and (max-width: 1024px) {
+        .app-logo {
+          width: 50px;
+          height: 50px;
+          padding: 7px;
         }
       }
 
-      // Modify performSearch to update colors
-      const originalPerformSearch = window.performSearch;
-      window.performSearch = function(query) {
-        updateThemeColor();
-        return originalPerformSearch(query);
-      };
-    </script>
+      /* Mobile devices */
+      @media screen and (max-width: 768px) {
+        .app-logo {
+          top: 15px;
+          left: 15px;
+          width: 45px;
+          height: 45px;
+          padding: 6px;
+        }
+      }
+
+      /* Small mobile devices */
+      @media screen and (max-width: 480px) {
+        .app-logo {
+          width: 40px;
+          height: 40px;
+          padding: 5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-logo" onclick="showSection('home')">
+      <img src="icons/icons8-logo-500.svg" alt="Auraly Logo">
+    </div>
     <div class="container">
       <div id="homeSection" class="home-section">
         <i class="fas fa-music music-icon"></i>
-        <h1 class="home-title">Lost in Melodies?</h1>
-        <p>Every beat tells a story, every rhythm holds a secret. Search your vibe in our musical universe where unknown tracks become unforgettable memories.</p>
-        <p>Want to peek into my musical world? My playlist is just a click away...</p>
-        <a href="artish/nepaliplaylist.html" class="playlist-btn">Explore My Playlist</a>
+        <h1 class="home-title">Welcome to Auraly</h1>
+        <p>Every beat tells a story, every rhythm holds a secret. Discover your perfect melody in our musical universe where unknown tracks become unforgettable memories.</p>
+        <p>Want to explore my curated collection? My personal playlists are just a click away...</p>
+        <button onclick="showSection('explore')" class="playlist-btn">Explore Playlists</button>
+      </div>
+
+      <div id="exploreSection" class="explore-section">
+        <div class="explore-content">
+          <h2>My Personal Playlists</h2>
+          <p class="explore-description">Dive into my curated collection of music from around the world. Each playlist tells a unique story through carefully selected tracks that represent different cultures and genres.</p>
+          
+          <div class="playlist-categories">
+            <a href="artish/nepaliplaylist.html" class="playlist-category">
+              <i class="fas fa-mountain"></i>
+              <span>Nepali Vibes</span>
+            </a>
+            <a href="artish/countryplaylist.html" class="playlist-category">
+              <i class="fas fa-guitar"></i>
+              <span>Country Roads</span>
+            </a>
+            <a href="artish/ukplaylist.html" class="playlist-category">
+              <i class="fas fa-crown"></i>
+              <span>British Beats</span>
+            </a>
+            <a href="artish/hiphopplaylist.html" class="playlist-category">
+              <i class="fas fa-record-vinyl"></i>
+              <span>Hip Hop Heat</span>
+            </a>
+          </div>
+        </div>
       </div>
 
       <div id="mainContent">
@@ -858,15 +1019,14 @@
         <div class="about-content">
           <p>Hi, I'm Nitish!</p>
           <p>
-            This app is for all the music lovers who want to experience a new
-            look while enjoying their favorite tunes. I've created a simple and
-            elegant interface to make your music discovery journey more
-            enjoyable.
+            Welcome to Auraly - where music meets emotion. This app is designed for all music lovers 
+            who want to experience a new way of discovering and enjoying their favorite tunes. I've created 
+            a simple and elegant interface to make your musical journey more enjoyable.
           </p>
           <p>Features:</p>
           <ul>
             <li>Search through millions of songs</li>
-            <li>Preview tracks</li>
+            <li>Preview tracks instantly</li>
             <li>Clean and modern interface</li>
             <li>Automatic theme adaptation based on album art</li>
           </ul>
@@ -1121,10 +1281,12 @@
         const homeSection = document.getElementById("homeSection");
         const mainContent = document.getElementById("mainContent");
         const aboutSection = document.getElementById("aboutSection");
+        const exploreSection = document.getElementById("exploreSection");
         
         homeSection.classList.remove("active");
         mainContent.classList.remove("active");
         aboutSection.classList.remove("active");
+        exploreSection.classList.remove("active");
 
         // Add a small delay before showing the new section
         setTimeout(() => {
@@ -1132,6 +1294,7 @@
           homeSection.style.display = "none";
           mainContent.style.display = "none";
           aboutSection.style.display = "none";
+          exploreSection.style.display = "none";
 
           // Show selected section and update nav link
           switch (section) {
@@ -1149,6 +1312,11 @@
               // Clear search results when going home
               document.getElementById("songsContainer").innerHTML = "";
               document.getElementById("searchInput").value = "";
+              break;
+            case "explore":
+              exploreSection.style.display = "block";
+              exploreSection.offsetHeight;
+              exploreSection.classList.add("active");
               break;
             default:
               mainContent.style.display = "block";

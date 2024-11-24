@@ -494,3 +494,14 @@ document.addEventListener('click', function(e) {
         sidebar.style.transform = '';
     }
 });
+
+// Show home section on page load
+document.addEventListener('DOMContentLoaded', () => {
+    // Hide all sections initially
+    document.querySelectorAll('.section').forEach(section => {
+        section.style.display = 'none';
+    });
+
+    // Show home section immediately
+    showSection('home');
+});
