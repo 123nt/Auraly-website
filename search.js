@@ -131,15 +131,85 @@ function createSongElement(song) {
             <div class="song-title">${song.title}</div>
             <div class="song-artist">${song.artist.name}</div>
         </div>
+        <div class="info-icon">
+            <i class="fas fa-info"></i>
+        </div>
+        <audio id="audio_${song.id}" src="${song.preview}"></audio>
     `;
 
+    // Add event listeners
+    const audio = songElement.querySelector('audio');
+
+    // Click event for song
     songElement.addEventListener('click', (e) => {
-        if (!e.target.matches('input[type="range"]')) {
-            playSong(song.title, song.artist.name, song.album.cover_xl, song.preview, songElement);
+        if (!e.target.matches('.info-icon, .info-icon *')) {
+            togglePlay(song.id, audio, songElement);
+            updateBackgroundImage();
         }
     });
 
+    // Info icon click
+    const infoIcon = songElement.querySelector('.info-icon');
+    if (infoIcon) {
+        infoIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            showSongDetails(e, song.title, song.artist.name, song.album.title, song.album.cover_xl);
+        });
+    }
+
     return songElement;
+}
+
+function togglePlay(songId, audio, songElement) {
+    // Remove playing class from all songs
+    document.querySelectorAll('.song').forEach(song => {
+        if (song !== songElement) {
+            song.classList.remove('playing');
+        }
+    });
+
+    // If there's a currently playing audio that's different from this one, stop it
+    if (currentAudio && currentAudio !== audio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        if (currentlyPlayingSong) {
+            currentlyPlayingSong.classList.remove('playing');
+        }
+    }
+
+    // Toggle play/pause for the clicked song
+    if (currentAudio === audio && !audio.paused) {
+        audio.pause();
+        songElement.classList.remove('playing');
+        currentAudio = null;
+        currentlyPlayingSong = null;
+    } else {
+        audio.play();
+        songElement.classList.add('playing');
+        currentAudio = audio;
+        currentlyPlayingSong = songElement;
+
+        // Add ended event listener for auto-play next song
+        audio.addEventListener('ended', () => {
+            songElement.classList.remove('playing');
+            const nextSong = songElement.nextElementSibling;
+            if (nextSong) {
+                const nextAudio = nextSong.querySelector('audio');
+                setTimeout(() => {
+                    togglePlay(nextSong.getAttribute('data-song-id'), nextAudio, nextSong);
+                }, 2000);
+            }
+        });
+    }
+}
+
+function updateBackgroundImage() {
+    currentSongIndex = (currentSongIndex % 21) + 1;
+    const backgroundImage = backgroundImages[currentSongIndex];
+    if (backgroundImage) {
+        bgContainer.style.backgroundImage = `url('${backgroundImage}')`;
+        bgContainer.classList.add('background-image-active');
+    }
 }
 
 function getAverageColorFromImage(imgElement) {
@@ -188,17 +258,7 @@ function updateTextColors(songElement, textColor) {
     }
 }
 
-function updateBackgroundImage() {
-    currentSongIndex = (currentSongIndex % 21) + 1;
-    const backgroundImage = backgroundImages[currentSongIndex];
-    if (backgroundImage) {
-        bgContainer.style.backgroundImage = `url('${backgroundImage}')`;
-        bgContainer.classList.add('background-image-active');
-    }
-}
-
 function playSong(title, artist, albumCover, previewUrl, songData) {
-    // Handle audio playback
     if (currentAudio) {
         currentAudio.pause();
     }
@@ -206,12 +266,10 @@ function playSong(title, artist, albumCover, previewUrl, songData) {
     currentAudio = new Audio(previewUrl);
     currentAudio.volume = 0.5;
 
-    // Play the audio
     currentAudio.play().catch(error => {
         console.error('Error playing audio:', error);
     });
 
-    // Update currently playing song
     if (currentlyPlayingSong) {
         currentlyPlayingSong.classList.remove('playing');
     }
@@ -223,11 +281,9 @@ function playSong(title, artist, albumCover, previewUrl, songData) {
 
 // Show home section on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Hide all sections initially
     document.querySelectorAll('.section').forEach(section => {
         section.style.display = 'none';
     });
 
-    // Show home section immediately
     showSection('home');
 });
