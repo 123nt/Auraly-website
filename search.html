@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Auraly - Your Musical Journey</title>
+    <title>Auraly </title>
     <style>
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -201,9 +201,55 @@
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), all 0.3s ease-in-out;
         cursor: pointer;
         position: relative;
-        overflow: hidden;
         border: none;
+        overflow: hidden;
         width: 90%;
+      }
+
+      .song .info-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        z-index: 2;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .song.playing .info-icon {
+        display: flex;
+      }
+
+      .song .info-icon:hover {
+        background: #4CAF50;
+        color: white;
+        transform: scale(1.1);
+      }
+
+      .song .info-icon i {
+        font-size: 14px;
+      }
+
+      @media (max-width: 768px) {
+        .info-icon {
+          width: 18px;
+          height: 18px;
+          font-size: 10px;
+          border-radius: 2px;
+          background: rgba(0, 0, 0, 0.1);
+        }
+
+        .info-icon i {
+          content: '!';
+        }
       }
 
       .song::after {
@@ -766,7 +812,7 @@
         }
 
         .song {
-          width: 95%;
+          width: 100%;
           padding: 8px 10px;
           margin-bottom: 6px;
         }
@@ -868,7 +914,7 @@
         }
 
         .song {
-          width: 70%;
+          width: 80%;
           margin-left: 7%;
 
         }
@@ -1047,6 +1093,173 @@
           opacity: 1;
           transform: translate(-50%, 0);
         }
+      }
+
+      /* Professional side panel styles */
+      .song-details-panel {
+        position: fixed;
+        right: -400px;
+        top: 0;
+        width: 400px;
+        height: 100vh;
+        background: inherit;
+        backdrop-filter: blur(20px);
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+        padding: 0;
+        visibility: hidden;
+        opacity: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .song-details-panel.active {
+        right: 0;
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .panel-header {
+        position: relative;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.03);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      .panel-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 24px;
+      }
+
+      .song-details-panel .album-cover {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 12px;
+        margin-bottom: 24px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      }
+
+      .song-details-panel .song-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: #000000;
+        margin-bottom: 8px;
+        line-height: 1.3;
+      }
+
+      .song-details-panel .song-artist {
+        font-size: 18px;
+        color: #000000;
+        margin-bottom: 4px;
+        font-weight: 500;
+      }
+
+      .song-details-panel .song-album {
+        font-size: 16px;
+        color: #000000;
+        margin-bottom: 24px;
+        opacity: 0.8;
+      }
+
+      .song-details-panel .song-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .song-details-panel .song-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: #000000;
+        margin-bottom: 8px;
+        line-height: 1.3;
+      }
+
+      .song-details-panel .song-artist {
+        font-size: 18px;
+        color: #000000;
+        margin-bottom: 4px;
+        font-weight: 500;
+      }
+
+      .song-details-panel .song-album {
+        font-size: 16px;
+        color: #000000;
+        margin-bottom: 24px;
+        opacity: 0.8;
+      }
+
+      .song-details-panel .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #000000;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+      }
+
+      .song-details-panel .close-btn:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      .time-info, .controls, .duration {
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        .song-details-panel {
+          width: 100%;
+          right: -100%;
+        }
+
+        .panel-content {
+          padding: 20px;
+        }
+
+        .song-details-panel .song-title {
+          font-size: 22px;
+        }
+
+        .song-details-panel .song-artist {
+          font-size: 16px;
+        }
+
+        .song-details-panel .song-album {
+          font-size: 14px;
+        }
+      }
+
+      .progress-container {
+        display: none;
+      }
+
+      .progress-handle {
+        display: none;
+      }
+
+      .next-icon, .prev-icon {
+        display: none;
+      }
+
+      .progress-container:hover .progress-handle {
+        display: none;
+      }
+
+      /* Remove both players */
+      .bottom-player, .floating-player {
+        display: none !important;
       }
     </style>
   </head>
@@ -1275,8 +1488,10 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      let currentlyPlayingAudio = null;
-      let currentlyPlayingContainer = null;
+      let currentPlayingSong = null;
+      let currentPlayingContainer = null;
+      let currentPlayingSongId = null;
+      let currentAlbumCover = null;
 
       function getLightColor() {
         // Your specified colors for page background
@@ -1302,6 +1517,7 @@
       async function performSearch(query) {
         const mainContent = document.getElementById('mainContent');
         const songsContainer = document.getElementById('songsContainer');
+        const songDetailsPanel = document.getElementById('songDetailsPanel');
         
         if (!query.trim()) {
           mainContent.classList.remove('has-results');
@@ -1342,6 +1558,9 @@
             btn.style.backgroundColor = darkerColor;
           });
           
+          // Update side panel background
+          songDetailsPanel.style.backgroundColor = newColor;
+          
           songsContainer.innerHTML = "";
 
           data.data.forEach((song, index) => {
@@ -1350,19 +1569,26 @@
             songElement.id = `song-${index}`;
             
             songElement.innerHTML = `
+              <button class="info-icon" onclick="showSongDetails(event, '${song.title}', '${song.artist.name}', '${song.album.title}', '${song.album.cover_medium}')">
+                !
+              </button>
               <img src="${song.album.cover_medium}" alt="${song.title}" />
               <div class="song-details">
                 <div class="song-title">${song.title}</div>
                 <div class="song-artist">${song.artist.name}</div>
                 <div class="progress-container">
                   <div class="progress-bar"></div>
-                  <div class="progress-handle"></div>
                 </div>
               </div>
               <audio class="audio-element" src="${song.preview}"></audio>
             `;
 
-            songElement.addEventListener("click", () => togglePlay(`song-${index}`, song.album.cover_medium));
+            songElement.addEventListener("click", (e) => {
+              // Don't trigger play if info button was clicked
+              if (!e.target.closest('.info-icon')) {
+                togglePlay(`song-${index}`, song.album.cover_medium);
+              }
+            });
             songsContainer.appendChild(songElement);
           });
 
@@ -1380,87 +1606,181 @@
         }
       }
 
-      function togglePlay(songId, albumCover) {
-        const songElement = document.getElementById(songId);
-        const audio = songElement.querySelector(".audio-element");
-        const progressBar = songElement.querySelector(".progress-bar");
-        const progressContainer = songElement.querySelector(".progress-container");
-
-        if (currentlyPlayingAudio && currentlyPlayingAudio !== audio) {
-          currentlyPlayingAudio.pause();
-          if (currentlyPlayingContainer) {
-            currentlyPlayingContainer.classList.remove("zoom", "playing");
-            const oldProgressBar = currentlyPlayingContainer.querySelector(".progress-bar");
-            if (oldProgressBar) oldProgressBar.style.width = "0%";
-          }
-        }
-
-        if (currentlyPlayingAudio === audio && !audio.paused) {
-          audio.pause();
-          songElement.classList.remove("zoom", "playing");
-          currentlyPlayingAudio = null;
-          currentlyPlayingContainer = null;
-          progressBar.style.width = "0%";
-        } else {
-          audio.play();
-          songElement.classList.add("zoom", "playing");
-          currentlyPlayingAudio = audio;
-          currentlyPlayingContainer = songElement;
-
-          // Update progress bar
-          const updateProgress = () => {
-            if (!audio.paused) {
-              const progress = (audio.currentTime / audio.duration) * 100;
-              progressBar.style.width = `${progress}%`;
-              requestAnimationFrame(updateProgress);
-            }
-          };
-          updateProgress();
-
-          // Handle progress bar clicks
-          const handleProgressClick = (e) => {
-            const rect = progressContainer.getBoundingClientRect();
-            const clickPosition = e.clientX - rect.left;
-            const progress = (clickPosition / rect.width) * 100;
-            audio.currentTime = (progress / 100) * audio.duration;
-          };
-
-          progressContainer.addEventListener("click", handleProgressClick);
-        }
-
-        // Handle song ending
-        audio.addEventListener("ended", () => {
-          songElement.classList.remove("zoom", "playing");
-          currentlyPlayingAudio = null;
-          currentlyPlayingContainer = null;
-          progressBar.style.width = "0%";
-
-          const songTitle = songElement.querySelector(".song-title").textContent;
-          const songArtist = songElement.querySelector(".song-artist").textContent;
-          const audioSrc = audio.src;
-          const albumImg = songElement.querySelector("img").src;
-
-          const songToDownload = {
-            title: songTitle,
-            artist: songArtist,
-            preview: audioSrc,
-            album: { cover_medium: albumImg }
-          };
-
-          showNotification(`${songTitle} has been saved!`);
-
-          // Play next song
-          const nextSongId = getNextSongId(songId);
-          if (nextSongId) {
-            togglePlay(nextSongId);
-          }
-        });
+      function isMobileDevice() {
+        return window.innerWidth <= 768;
       }
 
-      function getNextSongId(currentSongId) {
-        const currentIndex = parseInt(currentSongId.split("-")[1]);
+      function getNextSongId(currentId) {
+        const currentIndex = parseInt(currentId.split('-')[1]);
         const nextElement = document.getElementById(`song-${currentIndex + 1}`);
         return nextElement ? `song-${currentIndex + 1}` : null;
+      }
+
+      function togglePlay(songId, albumCover) {
+        const songElement = document.getElementById(songId);
+        const audioElement = songElement.querySelector('.audio-element');
+        const progressBar = songElement.querySelector('.progress-bar');
+        const songDetailsPanel = document.getElementById('songDetailsPanel');
+        const panelProgressBar = songDetailsPanel.querySelector('.progress-bar');
+        const currentTimeSpan = songDetailsPanel.querySelector('.current-time');
+        const durationSpan = songDetailsPanel.querySelector('.duration');
+
+        if (currentPlayingSong && currentPlayingSong !== audioElement) {
+          currentPlayingSong.pause();
+          currentPlayingSong.currentTime = 0;
+          document.querySelectorAll('.song').forEach(s => {
+            s.classList.remove('playing');
+            s.querySelector('.info-icon').style.display = 'none';
+          });
+          if (!isMobileDevice()) {
+            songDetailsPanel.classList.remove('active');
+          }
+        }
+
+        if (audioElement.paused) {
+          // Update song details in the panel
+          const songTitle = songElement.querySelector('.song-title').textContent;
+          const songArtist = songElement.querySelector('.song-artist').textContent;
+          const songAlbum = songElement.closest('.song').querySelector('.song-details').textContent;
+          
+          // Always update panel content, even if not showing it on mobile
+          updateSongDetailsPanel(songTitle, songArtist, songAlbum, albumCover);
+          
+          if (!isMobileDevice()) {
+            songDetailsPanel.classList.add('active');
+          }
+          
+          // Play the song
+          audioElement.play();
+          songElement.classList.add('playing');
+          songElement.querySelector('.info-icon').style.display = 'flex';
+          currentPlayingSong = audioElement;
+          currentPlayingSongId = songId;
+          currentAlbumCover = albumCover;
+
+          // Update progress bars
+          audioElement.addEventListener('timeupdate', () => {
+            const progress = (audioElement.currentTime / audioElement.duration) * 100;
+            progressBar.style.width = `${progress}%`;
+            panelProgressBar.style.width = `${progress}%`;
+            
+            // Update time display
+            const currentMinutes = Math.floor(audioElement.currentTime / 60);
+            const currentSeconds = Math.floor(audioElement.currentTime % 60);
+            const durationMinutes = Math.floor(audioElement.duration / 60);
+            const durationSeconds = Math.floor(audioElement.duration % 60);
+            
+            currentTimeSpan.textContent = `${currentMinutes}:${currentSeconds.toString().padStart(2, '0')}`;
+            durationSpan.textContent = `${durationMinutes}:${durationSeconds.toString().padStart(2, '0')}`;
+          });
+
+          audioElement.addEventListener('ended', () => {
+            songElement.classList.remove('playing');
+            progressBar.style.width = '0%';
+            panelProgressBar.style.width = '0%';
+            currentTimeSpan.textContent = '0:00';
+            
+            // Play next song automatically
+            const nextSong = songElement.closest('.song').nextElementSibling;
+            if (nextSong && nextSong.classList.contains('song')) {
+              const nextSongId = nextSong.id;
+              const nextAlbumCover = nextSong.querySelector('img').src;
+              togglePlay(nextSongId, nextAlbumCover);
+            }
+          });
+        } else {
+          // Pause the song
+          audioElement.pause();
+          songElement.classList.remove('playing');
+          songElement.querySelector('.info-icon').style.display = 'none';
+          if (!isMobileDevice()) {
+            songDetailsPanel.classList.remove('active');
+          }
+        }
+      }
+
+      function updateSongDetailsPanel(title, artist, album, albumCover) {
+        const panel = document.getElementById('songDetailsPanel');
+        panel.querySelector('.album-cover').src = albumCover;
+        panel.querySelector('.song-title').textContent = title;
+        panel.querySelector('.song-artist').textContent = artist;
+        panel.querySelector('.song-album').textContent = album;
+      }
+
+      function showSongDetails(event, title, artist, album, albumCover) {
+        event.stopPropagation(); // Prevent song from playing when clicking info
+        const songDetailsPanel = document.getElementById('songDetailsPanel');
+        
+        // Update panel content
+        songDetailsPanel.querySelector('.album-cover').src = albumCover;
+        songDetailsPanel.querySelector('.song-title').textContent = title;
+        songDetailsPanel.querySelector('.song-artist').textContent = artist;
+        songDetailsPanel.querySelector('.song-album').textContent = album;
+        
+        // Show the panel
+        songDetailsPanel.classList.add('active');
+        
+        // Setup close button
+        songDetailsPanel.querySelector('.close-btn').onclick = () => {
+          songDetailsPanel.classList.remove('active');
+        };
+      }
+
+      function enableDrag(e) {
+        const progressContainer = e.target.closest('.progress-container');
+        const audioElement = currentPlayingSong;
+        
+        if (!audioElement) return;
+        
+        function drag(e) {
+          e.preventDefault();
+          updateProgress(e);
+        }
+        
+        function stopDrag() {
+          document.removeEventListener('mousemove', drag);
+          document.removeEventListener('mouseup', stopDrag);
+        }
+        
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', stopDrag);
+      }
+
+      function updateProgress(e) {
+        const progressContainer = e.target.closest('.progress-container');
+        const audioElement = currentPlayingSong;
+        
+        if (!audioElement || !progressContainer) return;
+        
+        const rect = progressContainer.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const duration = audioElement.duration;
+        
+        audioElement.currentTime = (clickX / rect.width) * duration;
+      }
+
+      function playNextSong() {
+        const currentSong = document.querySelector('.song.playing');
+        if (!currentSong) return;
+        
+        const nextSong = currentSong.nextElementSibling;
+        if (nextSong && nextSong.classList.contains('song')) {
+          const nextSongId = nextSong.id;
+          const nextAlbumCover = nextSong.querySelector('img').src;
+          togglePlay(nextSongId, nextAlbumCover);
+        }
+      }
+
+      function playPreviousSong() {
+        const currentSong = document.querySelector('.song.playing');
+        if (!currentSong) return;
+        
+        const previousSong = currentSong.previousElementSibling;
+        if (previousSong && previousSong.classList.contains('song')) {
+          const previousSongId = previousSong.id;
+          const previousAlbumCover = previousSong.querySelector('img').src;
+          togglePlay(previousSongId, previousAlbumCover);
+        }
       }
 
       function showNotification(message, isError = false) {
@@ -1554,19 +1874,29 @@
         showSection('home');
 
         // Handle splash screen for first visit
-        const hasVisited = localStorage.getItem('hasVisitedAuraly');
         const splashScreen = document.getElementById('splashScreen');
-        
-        if (hasVisited) {
-          // Hide splash screen immediately if not first visit
-          splashScreen.style.display = 'none';
-        } else {
-          // Show splash screen animation on first visit
+        const mainContent = document.querySelector('.container');
+        const isFirstVisit = !localStorage.getItem('hasVisitedBefore');
+
+        if (isFirstVisit) {
+          // Show splash screen on first visit
+          splashScreen.style.display = 'flex';
+          mainContent.style.display = 'none';
+          
           setTimeout(() => {
             splashScreen.classList.add('fade-out');
-            // Set visited flag in localStorage
-            localStorage.setItem('hasVisitedAuraly', 'true');
-          }, 2500);
+            mainContent.style.display = 'block';
+            // Mark as visited
+            localStorage.setItem('hasVisitedBefore', 'true');
+            
+            setTimeout(() => {
+              splashScreen.style.display = 'none';
+            }, 500);
+          }, 2000);
+        } else {
+          // Hide splash screen immediately on subsequent visits
+          splashScreen.style.display = 'none';
+          mainContent.style.display = 'block';
         }
 
         const searchInput = document.getElementById("searchInput");
@@ -1591,5 +1921,19 @@
         // }, 2000);
       });
     </script>
+    <!-- Update the song details panel HTML structure -->
+    <div class="song-details-panel" id="songDetailsPanel">
+      <div class="panel-header">
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="panel-content">
+        <img class="album-cover" src="" alt="Album Cover">
+        <div class="song-info">
+          <div class="song-title"></div>
+          <div class="song-artist"></div>
+          <div class="song-album"></div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
