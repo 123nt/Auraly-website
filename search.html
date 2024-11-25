@@ -4,16 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/svg+xml" href="icons/icons8-logo-500.svg" />
     <title>Auraly</title>
   </head>
   <body>
     <script>
-      // Handle back button functionality
+      // Handle browser/device back button navigation
       window.addEventListener("popstate", function (event) {
-        if (event.state) {
-          showSection(event.state.section);
+        // Check if we're in a mobile app context
+        if (
+          window.navigator.standalone ||
+          window.matchMedia("(display-mode: standalone)").matches
+        ) {
+          // Let the native app back gesture/button handle navigation
+          return;
+        }
+
+        // For regular browser navigation
+        if (document.referrer.includes(window.location.hostname)) {
+          // If previous page is from our site, let the browser handle it naturally
+          if (event.state) {
+            showSection(event.state.section);
+          }
         } else {
-          history.back();
+          // If coming from external site, go to home section
+          showSection("home");
         }
       });
 
