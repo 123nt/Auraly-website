@@ -479,7 +479,7 @@
         scrollbar-width: none;  /* Firefox */
         -ms-overflow-style: none;  /* IE and Edge */
         display: none;
-        padding: 20px;
+        padding: 15px;
         max-width: 420px;
         margin: 0 auto;
         text-align: center;
@@ -822,6 +822,14 @@
           grid-template-columns: repeat(2, 1fr);
           max-width: 900px;
           margin: 20px auto;
+        }
+        
+        .about-section {
+          padding: 10px;
+        }
+        
+        .about-content {
+          padding: 10px;
         }
       }
 

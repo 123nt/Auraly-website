@@ -231,7 +231,7 @@ body {
 
     .cta-buttons {
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.5rem;
     }
 
     .cta-button {
@@ -240,8 +240,31 @@ body {
         padding: 0.9rem 1.8rem;
     }
 
-    .hero-image {
-        margin-top: 2rem;
+    .cta-button svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .web-btn {
+        background: transparent;
+        border: 1.5px solid currentColor;
+        margin-top: 0.5rem;
+    }
+
+    .cta-buttons2 {
+        max-width: 280px;
+        margin: 0 auto;
+    }
+
+    .cta-buttons2 .cta-button {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .cta-button {
+        padding: 12px 16px;
+        font-size: 14px;
     }
 }
 
