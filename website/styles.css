@@ -1,14 +1,21 @@
+:root {
+  --transition-standard: all 0.3s ease;
+  --transition-quick: all 0.2s ease;
+  --bg-overlay-light: rgba(0, 0, 0, 0.1);
+  --bg-overlay-lighter: rgba(0, 0, 0, 0.08);
+  --text-shadow-standard: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
       .side-progress {
         width: 60%;
         height: 6px;
-        background: rgba(0, 0, 0, 0.08);
+        background: var(--bg-overlay-lighter);
         border-radius: 3px;
         margin: 20px auto;
         position: relative;
         cursor: pointer;
         box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-        transition: all 0.2s ease;
+        transition: var(--transition-quick);
       }
 
       .side-progress:hover {
@@ -20,7 +27,7 @@
         height: 100%;
         background: linear-gradient(90deg, #000000, #333333);
         border-radius: 3px;
-        transition: width 0.1s linear;
+        transition: var(--transition-standard);
         position: relative;
       }
 
@@ -200,7 +207,7 @@
         color: #000000;
         font-weight: 500;
         letter-spacing: 0.5px;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        text-shadow: var(--text-shadow-standard);
       }
 
       #songsContainer {
@@ -530,7 +537,7 @@
         font-size: 2.5em;
         margin-bottom: 15px;
         color: #000000;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        text-shadow: var(--text-shadow-standard);
         animation: fadeInDown 0.8s ease-out;
       }
 

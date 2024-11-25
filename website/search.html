@@ -4,104 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" type="image/svg+xml" href="icons/icons8-logo-500.svg" />
-    <link rel="manifest" href="manifest.json" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="apple-mobile-web-app-title" content="Auraly" />
-    <link rel="apple-touch-icon" href="icons/icons8-logo-500.svg" />
-    <title>Auraly</title>
+    <link rel="icon" type="image/svg+xml" href="../icons/icons8-logo-500.svg" />
+
+    <title>Auraly -music player</title>
   </head>
   <body>
     <script>
-      // Add this at the top of your script section
-      function handleBackNavigation() {
-        const previousPage = document.referrer;
-
-        // Check if we're in a PWA/standalone app context
-        const isInStandaloneMode =
-          window.matchMedia("(display-mode: standalone)").matches ||
-          window.navigator.standalone;
-
-        // If in standalone mode, let native back gesture/button handle it
-        if (isInStandaloneMode) {
-          return;
-        }
-
-        // Handle web browser navigation
-        if (previousPage) {
-          // If coming from one of our playlist pages
-          if (previousPage.includes("/artish/")) {
-            window.location.href = previousPage;
-          } else {
-            window.history.back();
-          }
-        } else {
-          showSection("home");
-        }
-      }
-
       // Update the navigation event listeners
       window.addEventListener("popstate", function (event) {
         handleBackNavigation();
       });
-
-      // Update showSection function to handle navigation state
-      function showSection(section) {
-        updateThemeColor();
-        const sections = ["home", "search", "about", "explore"];
-
-        // Save previous section before changing
-        const previousSection = sections.find(
-          (s) =>
-            document.getElementById(s + "Section").style.display === "block"
-        );
-
-        sections.forEach((s) => {
-          const elem = document.getElementById(s + "Section");
-          if (elem) {
-            elem.style.display = s === section ? "block" : "none";
-          }
-        });
-
-        // Update history with both current and previous section
-        history.pushState(
-          {
-            section: section,
-            previousSection: previousSection,
-          },
-          "",
-          "#" + section
-        );
-
-        // Update active state of navigation buttons
-        document.querySelectorAll(".nav-btn").forEach((btn) => {
-          btn.classList.remove("active");
-          if (btn.getAttribute("data-section") === section) {
-            btn.classList.add("active");
-          }
-        });
-
-        // Reset container class
-        const container = document.querySelector(".container");
-        container.classList.remove("has-results");
-
-        // Clear search results if moving away from search section
-        if (section !== "search") {
-          const searchResults = document.getElementById("searchResults");
-          if (searchResults) {
-            searchResults.innerHTML = "";
-          }
-        }
-      }
-
-      // Update the playlist navigation
-      function navigateToPlaylist(playlistUrl) {
-        sessionStorage.setItem("previousPage", window.location.href);
-        sessionStorage.setItem("previousSection", getCurrentSection());
-        window.location.href = playlistUrl;
-      }
 
       // Helper function to get current section
       function getCurrentSection() {
@@ -110,75 +22,6 @@
             document.getElementById(section + "Section").style.display ===
             "block"
         );
-      }
-
-      // Handle browser/device back button navigation
-      window.addEventListener("popstate", function (event) {
-        // Get the previous page URL from history
-        const previousPage = document.referrer;
-
-        // If coming from a playlist page, go back to that page
-        if (
-          previousPage.includes("playlist.html") ||
-          previousPage.includes("country-playlist.html") ||
-          previousPage.includes("hip-hop.html") ||
-          previousPage.includes("uk-playlist.html") ||
-          previousPage.includes("nepaliplaylist.html")
-        ) {
-          window.location.href = previousPage;
-          return;
-        }
-
-        // If we have a valid state, show that section
-        if (event.state && event.state.section) {
-          showSection(event.state.section);
-          return;
-        }
-
-        // Default to home section if no valid previous state
-        showSection("home");
-      });
-
-      // Add this function to handle direct navigation to playlists
-      function navigateToPlaylist(playlistUrl) {
-        // Save current page in session storage before navigating
-        sessionStorage.setItem("previousPage", window.location.href);
-        window.location.href = playlistUrl;
-      }
-
-      // Modify showSection to use history API
-      function showSection(section) {
-        updateThemeColor();
-        const sections = ["home", "search", "about", "explore"];
-        sections.forEach((s) => {
-          const elem = document.getElementById(s + "Section");
-          if (elem) {
-            elem.style.display = s === section ? "block" : "none";
-          }
-        });
-
-        // Update history state
-        history.pushState({ section: section }, "", "#" + section);
-
-        // Update active state of navigation buttons
-        document.querySelectorAll(".nav-btn").forEach((btn) => {
-          btn.classList.remove("active");
-          if (btn.getAttribute("data-section") === section) {
-            btn.classList.add("active");
-          }
-        });
-
-        // Reset container class
-        const container = document.querySelector(".container");
-        container.classList.remove("has-results");
-
-        // Clear search results if moving away from search section
-        if (section !== "search") {
-          const searchResults = document.getElementById("searchResults");
-          if (searchResults) {
-            searchResults.innerHTML = "";
-          }
-        }
       }
 
       function generatePastelColor() {
@@ -230,48 +73,9 @@
           // The filter: brightness(88%) is handled in CSS
         });
       }
-
-      // Original showSection function with color update
-      function showSection(section) {
-        updateThemeColor();
-        const sections = ["home", "search", "about", "explore"];
-        sections.forEach((s) => {
-          const elem = document.getElementById(s + "Section");
-          if (elem) {
-            elem.style.display = s === section ? "block" : "none";
-          }
-        });
-
-        // Update active state of navigation buttons
-        document.querySelectorAll(".nav-btn").forEach((btn) => {
-          btn.classList.remove("active");
-          if (btn.getAttribute("data-section") === section) {
-            btn.classList.add("active");
-          }
-        });
-
-        // Reset container class
-        const container = document.querySelector(".container");
-        container.classList.remove("has-results");
-
-        // Clear search results if moving away from search section
-        if (section !== "search") {
-          const searchResults = document.getElementById("searchResults");
-          if (searchResults) {
-            searchResults.innerHTML = "";
-          }
-        }
-      }
-
-      // Modify performSearch to update colors
-      const originalPerformSearch = window.performSearch;
-      window.performSearch = function (query) {
-        updateThemeColor();
-        return originalPerformSearch(query);
-      };
     </script>
     <div class="app-logo" onclick="showSection('home')">
-      <img src="icons/icons8-logo-500.svg" alt="Auraly Logo" />
+      <img src="../icons/icons8-logo-500.svg" alt="Auraly Logo" />
     </div>
     <div class="container">
       <div id="homeSection" class="home-section">
@@ -301,19 +105,19 @@
           </p>
 
           <div class="playlist-categories">
-            <a href="artish/nepaliplaylist.html" class="playlist-category">
+            <a href="../artish/nepaliplaylist.html" class="playlist-category">
               <i class="fas fa-mountain"></i>
               <span>Nepali Vibes</span>
             </a>
-            <a href="artish/country-playlist.html" class="playlist-category">
+            <a href="../artish/country-playlist.html" class="playlist-category">
               <i class="fas fa-guitar"></i>
               <span>Country Roads</span>
             </a>
-            <a href="artish/uk-playlist.html" class="playlist-category">
+            <a href="../artish/uk-playlist.html" class="playlist-category">
               <i class="fas fa-crown"></i>
               <span>British Beats</span>
             </a>
-            <a href="artish/hip-hop.html" class="playlist-category">
+            <a href="../artish/hip-hop.html" class="playlist-category">
               <i class="fas fa-record-vinyl"></i>
               <span>Hip Hop Heat</span>
             </a>
@@ -364,15 +168,6 @@
 
     <nav class="bottom-nav">
       <ul class="nav-links">
-        <li>
-          <a
-            href="#home"
-            onclick="event.preventDefault(); handleBackNavigation(); return false;"
-            class="nav-link back-link"
-            style="display: none"
-            >Back</a
-          >
-        </li>
         <li>
           <a
             href="#home"
@@ -545,10 +340,6 @@
         }
       }
 
-      function isMobileDevice() {
-        return window.innerWidth <= 768;
-      }
-
       function getNextSongId(currentId) {
         const currentIndex = parseInt(currentId.split("-")[1]);
         const nextElement = document.getElementById(`song-${currentIndex + 1}`);
@@ -569,9 +360,6 @@
             s.classList.remove("playing");
             s.querySelector(".info-icon").style.display = "none";
           });
-          if (!isMobileDevice()) {
-            songDetailsPanel.classList.remove("active");
-          }
         }
 
         if (audioElement.paused) {
@@ -584,10 +372,6 @@
             .querySelector(".song-details").textContent;
 
           updateSongDetailsPanel(songTitle, songArtist, songAlbum, albumCover);
-
-          if (!isMobileDevice()) {
-            songDetailsPanel.classList.add("active");
-          }
 
           audioElement.play();
           songElement.classList.add("playing");
@@ -923,134 +707,6 @@
 
       document.addEventListener("mouseup", () => {
         isDragging = false;
-      });
-
-      function updateProgressFromEvent(e) {
-        if (!currentPlayingSong) return;
-
-        const progressRect = progressContainer.getBoundingClientRect();
-        const clickPosition =
-          (e.clientX - progressRect.left) / progressRect.width;
-        const newTime =
-          Math.max(0, Math.min(1, clickPosition)) * currentPlayingSong.duration;
-
-        currentPlayingSong.currentTime = newTime;
-        updateSideProgress(currentPlayingSong);
-      }
-
-      function togglePlay(songId, albumCover) {
-        const songElement = document.getElementById(songId);
-        const audioElement = songElement.querySelector(".audio-element");
-        const songDetailsPanel = document.getElementById("songDetailsPanel");
-        const panelProgressBar =
-          songDetailsPanel.querySelector(".progress-bar");
-        const currentTimeSpan = songDetailsPanel.querySelector(".current-time");
-        const durationSpan = songDetailsPanel.querySelector(".duration");
-
-        if (currentPlayingSong && currentPlayingSong !== audioElement) {
-          currentPlayingSong.pause();
-          currentPlayingSong.currentTime = 0;
-          document.querySelectorAll(".song").forEach((s) => {
-            s.classList.remove("playing");
-            s.querySelector(".info-icon").style.display = "none";
-          });
-          if (!isMobileDevice()) {
-            songDetailsPanel.classList.remove("active");
-          }
-        }
-
-        if (audioElement.paused) {
-          // Update song details in the panel
-          const songTitle =
-            songElement.querySelector(".song-title").textContent;
-          const songArtist =
-            songElement.querySelector(".song-artist").textContent;
-          const songAlbum = songElement
-            .closest(".song")
-            .querySelector(".song-details").textContent;
-
-          // Always update panel content, even if not showing it on mobile
-          updateSongDetailsPanel(songTitle, songArtist, songAlbum, albumCover);
-
-          if (!isMobileDevice()) {
-            songDetailsPanel.classList.add("active");
-          }
-
-          // Play the song
-          audioElement.play();
-          songElement.classList.add("playing");
-          songElement.querySelector(".info-icon").style.display = "flex";
-          currentPlayingSong = audioElement;
-          currentPlayingSongId = songId;
-          currentAlbumCover = albumCover;
-
-          updatePlayPauseButton(true);
-
-          audioElement.addEventListener("ended", () => {
-            songElement.classList.remove("playing");
-            songElement.querySelector(".info-icon").style.display = "none";
-            currentPlayingSong = null;
-            currentPlayingSongId = null;
-            currentAlbumCover = null;
-            updatePlayPauseButton(false);
-            const currentIndex = parseInt(songId.split("-")[1]);
-            const nextSongElement = document.getElementById(
-              `song-${currentIndex + 1}`
-            );
-
-            if (nextSongElement) {
-              const nextAlbumCover = nextSongElement.querySelector("img").src;
-              togglePlay(`song-${currentIndex + 1}`, nextAlbumCover);
-            }
-          });
-
-          audioElement.addEventListener("timeupdate", () => {
-            if (!isDragging) {
-              updateSideProgress(audioElement);
-            }
-          });
-        } else {
-          // Pause the song
-          audioElement.pause();
-          songElement.classList.remove("playing");
-          songElement.querySelector(".info-icon").style.display = "none";
-          updatePlayPauseButton(false);
-          if (!isMobileDevice()) {
-            songDetailsPanel.classList.remove("active");
-          }
-        }
-      }
-
-      // Register service worker
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker
-            .register("/sw.js")
-            .then((registration) => {
-              console.log("ServiceWorker registration successful");
-            })
-            .catch((err) => {
-              console.log("ServiceWorker registration failed: ", err);
-            });
-        });
-      }
-
-      // Add to home screen prompt
-      let deferredPrompt;
-      window.addEventListener("beforeinstallprompt", (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-
-        // Show install prompt when appropriate
-        // For example, you could add an "Install App" button to your UI
-        // When clicked, call:
-        // deferredPrompt.prompt();
-        // deferredPrompt.userChoice.then((choiceResult) => {
-        //     if (choiceResult.outcome === 'accepted') {
-        //         console.log('User accepted the install prompt');
-        //     }
-        //     deferredPrompt = null;
-        // });
       });
     </script>
     <!-- Update the song details panel HTML structure -->
