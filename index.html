@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auraly</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/svg+xml" href="/icons/adaptive-favicon.svg">
+    <link rel="alternate icon" type="image/svg+xml" href="/icons/icons8-logo-50.svg">
+    <meta name="theme-color" content="#000000">
+    <style>
+        #install-banner {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #333;
+            color: white;
+            padding: 16px;
+            text-align: center;
+            z-index: 1000;
+        }
+        #install-button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            margin-left: 12px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Your existing content here -->
+
+    <!-- Install Banner -->
+    <div id="install-banner">
+        Get the best experience with the Auraly app!
+        <button id="install-button">Install Now</button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/app.js"></script>
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,36 +1,47 @@
 {
   "name": "Auraly",
   "short_name": "Auraly",
-  "description": "Discover and enjoy music from around the world",
-  "start_url": "/search.html",
+  "description": "Experience music like never before with Auraly",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
   "icons": [
     {
-      "src": "icons/icons8-logo-50.svg",
+      "src": "/icons/icons8-logo-50.svg",
       "sizes": "50x50",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any"
     },
     {
-      "src": "icons/icons8-logo-100.svg", 
+      "src": "/icons/icons8-logo-100.svg",
       "sizes": "100x100",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any"
     },
     {
-      "src": "icons/icons8-logo-150.svg",
+      "src": "/icons/icons8-logo-150.svg",
       "sizes": "150x150",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any"
     },
     {
-      "src": "icons/icons8-logo-250.svg",
+      "src": "/icons/icons8-logo-250.svg",
       "sizes": "250x250",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any"
     },
     {
-      "src": "icons/icons8-logo-500.svg",
+      "src": "/icons/icons8-logo-500.svg",
       "sizes": "500x500",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/adaptive-favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
     }
   ]
-} 
+}
