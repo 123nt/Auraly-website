@@ -11,26 +11,37 @@
     <script>
       // Handle browser/device back button navigation
       window.addEventListener("popstate", function (event) {
-        // Check if we're in a mobile app context
+        // Get the previous page URL from history
+        const previousPage = document.referrer;
+
+        // If coming from a playlist page, go back to that page
         if (
-          window.navigator.standalone ||
-          window.matchMedia("(display-mode: standalone)").matches
+          previousPage.includes("playlist.html") ||
+          previousPage.includes("country-playlist.html") ||
+          previousPage.includes("hip-hop.html") ||
+          previousPage.includes("uk-playlist.html") ||
+          previousPage.includes("nepaliplaylist.html")
         ) {
-          // Let the native app back gesture/button handle navigation
+          window.location.href = previousPage;
           return;
         }
 
-        // For regular browser navigation
-        if (document.referrer.includes(window.location.hostname)) {
-          // If previous page is from our site, let the browser handle it naturally
-          if (event.state) {
-            showSection(event.state.section);
-          }
-        } else {
-          // If coming from external site, go to home section
-          showSection("home");
+        // If we have a valid state, show that section
+        if (event.state && event.state.section) {
+          showSection(event.state.section);
+          return;
         }
+
+        // Default to home section if no valid previous state
+        showSection("home");
       });
+
+      // Add this function to handle direct navigation to playlists
+      function navigateToPlaylist(playlistUrl) {
+        // Save current page in session storage before navigating
+        sessionStorage.setItem("previousPage", window.location.href);
+        window.location.href = playlistUrl;
+      }
 
       // Modify showSection to use history API
       function showSection(section) {
