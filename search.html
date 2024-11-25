@@ -192,17 +192,19 @@
         </div>
       </div>
 
-      <div id="mainContent">
-        <h1>Music Search</h1>
-        <div class="search-container">
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Search for music..."
-          />
-          <button id="searchButton">Search</button>
+      <div id="searchSection" class="search-section">
+        <div id="mainContent">
+          <h1>Music Search</h1>
+          <div class="search-container">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search for music..."
+            />
+            <button id="searchButton">Search</button>
+          </div>
+          <div id="songsContainer"></div>
         </div>
-        <div id="songsContainer"></div>
       </div>
 
       <div id="aboutSection" class="about-section">
@@ -234,12 +236,29 @@
     <nav class="bottom-nav">
       <ul class="nav-links">
         <li>
-          <a href="search.html" onclick="showSection('home')">Home</a>
+          <a
+            href="#home"
+            onclick="showSection('home'); return false;"
+            class="nav-link"
+            >Home</a
+          >
         </li>
         <li>
-          <a href="#" onclick="showSection('search')">Search</a>
+          <a
+            href="#search"
+            onclick="showSection('search'); return false;"
+            class="nav-link"
+            >Search</a
+          >
         </li>
-        <li><a href="#" onclick="showSection('about')">About</a></li>
+        <li>
+          <a
+            href="#about"
+            onclick="showSection('about'); return false;"
+            class="nav-link"
+            >About</a
+          >
+        </li>
       </ul>
     </nav>
     <script
