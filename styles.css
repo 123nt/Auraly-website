@@ -812,11 +812,14 @@
         #searchInput {
           padding: 10px;
           font-size: 14px;
+          width: 50%;
+          max-width: 250px;
         }
 
         #searchButton {
           padding: 10px 14px;
-          font-size: 13px;
+          font-size: 16px;
+          margin-top: 7px;
         }
 
         .song {
