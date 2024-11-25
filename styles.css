@@ -1238,3 +1238,11 @@
         width: 14px;
         height: 14px;
       }
+
+      #songsContainer .song {
+        transition: transform 0.3s ease;
+      }
+
+      #songsContainer .song.playing {
+        transform: scale(1.06);
+      }
