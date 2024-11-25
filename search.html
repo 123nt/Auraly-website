@@ -9,6 +9,103 @@
   </head>
   <body>
     <script>
+      // Add this at the top of your script section
+      function handleBackNavigation() {
+        const previousPage = document.referrer;
+
+        // Check if we're in a PWA/standalone app context
+        const isInStandaloneMode =
+          window.matchMedia("(display-mode: standalone)").matches ||
+          window.navigator.standalone;
+
+        // If in standalone mode, let native back gesture/button handle it
+        if (isInStandaloneMode) {
+          return;
+        }
+
+        // Handle web browser navigation
+        if (previousPage) {
+          // If coming from one of our playlist pages
+          if (previousPage.includes("/artish/")) {
+            window.location.href = previousPage;
+          } else {
+            window.history.back();
+          }
+        } else {
+          showSection("home");
+        }
+      }
+
+      // Update the navigation event listeners
+      window.addEventListener("popstate", function (event) {
+        handleBackNavigation();
+      });
+
+      // Update showSection function to handle navigation state
+      function showSection(section) {
+        updateThemeColor();
+        const sections = ["home", "search", "about", "explore"];
+
+        // Save previous section before changing
+        const previousSection = sections.find(
+          (s) =>
+            document.getElementById(s + "Section").style.display === "block"
+        );
+
+        sections.forEach((s) => {
+          const elem = document.getElementById(s + "Section");
+          if (elem) {
+            elem.style.display = s === section ? "block" : "none";
+          }
+        });
+
+        // Update history with both current and previous section
+        history.pushState(
+          {
+            section: section,
+            previousSection: previousSection,
+          },
+          "",
+          "#" + section
+        );
+
+        // Update active state of navigation buttons
+        document.querySelectorAll(".nav-btn").forEach((btn) => {
+          btn.classList.remove("active");
+          if (btn.getAttribute("data-section") === section) {
+            btn.classList.add("active");
+          }
+        });
+
+        // Reset container class
+        const container = document.querySelector(".container");
+        container.classList.remove("has-results");
+
+        // Clear search results if moving away from search section
+        if (section !== "search") {
+          const searchResults = document.getElementById("searchResults");
+          if (searchResults) {
+            searchResults.innerHTML = "";
+          }
+        }
+      }
+
+      // Update the playlist navigation
+      function navigateToPlaylist(playlistUrl) {
+        sessionStorage.setItem("previousPage", window.location.href);
+        sessionStorage.setItem("previousSection", getCurrentSection());
+        window.location.href = playlistUrl;
+      }
+
+      // Helper function to get current section
+      function getCurrentSection() {
+        return ["home", "search", "about", "explore"].find(
+          (section) =>
+            document.getElementById(section + "Section").style.display ===
+            "block"
+        );
+      }
+
       // Handle browser/device back button navigation
       window.addEventListener("popstate", function (event) {
         // Get the previous page URL from history
@@ -264,7 +361,16 @@
         <li>
           <a
             href="#home"
-            onclick="showSection('home'); return false;"
+            onclick="event.preventDefault(); handleBackNavigation(); return false;"
+            class="nav-link back-link"
+            style="display: none"
+            >Back</a
+          >
+        </li>
+        <li>
+          <a
+            href="#home"
+            onclick="event.preventDefault(); showSection('home'); return false;"
             class="nav-link"
             >Home</a
           >
@@ -272,7 +378,7 @@
         <li>
           <a
             href="#search"
-            onclick="showSection('search'); return false;"
+            onclick="event.preventDefault(); showSection('search'); return false;"
             class="nav-link"
             >Search</a
           >
@@ -280,7 +386,7 @@
         <li>
           <a
             href="#about"
-            onclick="showSection('about'); return false;"
+            onclick="event.preventDefault(); showSection('about'); return false;"
             class="nav-link"
             >About</a
           >
