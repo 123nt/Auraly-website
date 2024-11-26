@@ -214,6 +214,7 @@ body {
     border-radius: 26px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
     transition: all 0.4s ease;
+    animation: float 3s ease-in-out infinite;
 }
 
 .hero-image img:hover {
@@ -223,13 +224,13 @@ body {
 
 @keyframes float {
     0% {
-        transform: perspective(1000px) rotateY(-5deg) translateY(0px);
+        transform: translateY(0px);
     }
     50% {
-        transform: perspective(1000px) rotateY(-2deg) translateY(-15px);
+        transform: translateY(-20px);
     }
     100% {
-        transform: perspective(1000px) rotateY(-5deg) translateY(0px);
+        transform: translateY(0px);
     }
 }
 
