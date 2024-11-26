@@ -359,31 +359,62 @@ body {
 
 /* About Section */
 .about {
-    padding: 5rem 5%;
+    padding: 7rem 7%;
     display: flex;
     align-items: center;
-    gap: 3rem;
+    gap: 4rem;
+    background: var(--card-background);
 }
 
 .about-content {
     flex: 1;
 }
 
-.about h2 {
+.about-content h2 {
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
     color: var(--primary-color);
-    font-weight: 700;
+}
+
+.about-content p {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    line-height: 1.8;
 }
 
 .about-image {
     flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .about-image img {
     max-width: 100%;
+    height: auto;
     border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 30px var(--shadow-color);
+    transition: transform 0.3s ease;
+}
+
+.about-image img:hover {
+    transform: translateY(-5px);
+}
+
+@media screen and (max-width: 768px) {
+    .about {
+        flex-direction: column;
+        text-align: center;
+        padding: 5rem 7%;
+    }
+
+    .about-image {
+        order: -1;
+    }
+
+    .about-image img {
+        max-width: 80%;
+    }
 }
 
 /* Download Section */
