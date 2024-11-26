@@ -7,6 +7,9 @@
     <link rel="icon" type="image/svg+xml" href="icons/adaptive-favicon.svg" />
     <link rel="icon" type="image/svg+xml" href="icons/icons8-logo-50.svg" />
     <title>Auraly -music player</title>
+    <meta name="theme-color" content="#EEE0CA" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icons/adaptive-favicon.svg" />
   </head>
   <body>
     <script>
@@ -25,9 +28,15 @@
         );
       }
     </script>
-    <div class="app-logo" onclick="showSection('home')">
+    <div class="app-logo" onclick="showSection('home')" style="padding: 15px">
       <a href="auraly.html">
-        <img src="icons/adaptive-favicon.svg" alt="Auraly Logo" />
+        <img
+          src="icons/adaptive-favicon.svg"
+          alt="Auraly Logo"
+          style="width: 50px; height: 50px; transition: transform 0.3s ease"
+          onmouseover="this.style.transform='scale(1.1)'"
+          onmouseout="this.style.transform='scale(1)'"
+        />
       </a>
     </div>
     <div class="container">
@@ -692,5 +701,67 @@
         </div>
       </div>
     </div>
+    <script>
+      let deferredPrompt;
+
+      // Create install buttons immediately when page loads
+      document.addEventListener("DOMContentLoaded", () => {
+        // Create floating button
+        const floatingInstallBtn = document.createElement("button");
+        floatingInstallBtn.textContent = "📱 Install Auraly";
+        floatingInstallBtn.classList.add("floating-install-button");
+        floatingInstallBtn.style.cssText = `
+          position: fixed;
+          bottom: 80px;
+          right: 20px;
+          padding: 12px 24px;
+          background: #B3C8CF;
+          border: none;
+          border-radius: 25px;
+          color: black;
+          cursor: pointer;
+          z-index: 1000;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+          display: block;
+          transition: all 0.3s ease;
+          font-size: 16px;
+          font-weight: 500;
+        `;
+
+        floatingInstallBtn.addEventListener("mouseover", () => {
+          floatingInstallBtn.style.transform = "scale(1.05)";
+          floatingInstallBtn.style.background = "#c79881";
+        });
+
+        floatingInstallBtn.addEventListener("mouseout", () => {
+          floatingInstallBtn.style.transform = "scale(1)";
+          floatingInstallBtn.style.background = "#D2A993";
+        });
+
+        floatingInstallBtn.addEventListener("click", () => {
+          if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then(({ outcome }) => {
+              if (outcome === "accepted") {
+                console.log("User accepted the install prompt");
+              }
+              deferredPrompt = null;
+            });
+          } else {
+            alert(
+              "To install the app: \n1. On Desktop: Click the install icon in your browser's address bar\n2. On Mobile: Add to Home Screen from your browser menu"
+            );
+          }
+        });
+
+        document.body.appendChild(floatingInstallBtn);
+      });
+
+      // Handle install prompt
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+      });
+    </script>
   </body>
 </html>
