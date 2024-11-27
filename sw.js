@@ -1,9 +1,9 @@
 const CACHE_NAME = "auraly-cache-v1";
 const urlsToCache = [
-  "/search.html",
-  "/styles.css",
-  "/icons/adaptive-favicon.svg",
-  "/icons/icons8-logo-50.svg",
+  "./search.html",
+  "./styles.css",
+  "./icons/adaptive-favicon.svg",
+  "./icons/icons8-logo-50.svg",
 ];
 
 self.addEventListener("install", (event) => {
