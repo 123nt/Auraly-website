@@ -3,23 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="icons/adaptive-favicon.svg" />
-    <link rel="icon" type="image/svg+xml" href="icons/icons8-logo-50.svg" />
-    <title>Auraly</title>
+    <title>Auraly - Your AI Music Companion</title>
     <link rel="stylesheet" href="auraly.css" />
+    <link rel="icon" type="image/svg+xml" href="icons/adaptive-favicon.svg" />
     <link
-      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+      rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
     <nav class="navbar">
       <div class="nav-logo">
-        <img src="icons/icons8-logo-500.svg" alt="Auraly Logo" />
+        <img
+          src="icons/icons8-logo-500.svg"
+          alt="Auraly Logo"
+          width="40"
+          height="40"
+        />
         <span>Auraly</span>
       </div>
       <div class="hamburger">
@@ -34,226 +38,175 @@
     </nav>
 
     <header class="hero">
-      <div class="hero-content" data-aos="fade-up">
+      <div class="hero-content" data-aos="fade-up" data-aos-duration="800">
         <h1>Experience Music Like Never Before</h1>
         <p>
           Discover, stream, and enjoy your favorite music with Auraly's
           intelligent music player.
         </p>
+        <p class="tip">Try the web version now -!</p>
         <div class="cta-buttons">
-          <a
-            href="download.html"
-            class="cta-button download-btn"
-            data-hover="Get it on mobile"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            Download App
-          </a>
           <a
             href="https://123nt.github.io/auraly-app/search.html"
             class="cta-button web-btn"
-            data-hover="Try it in your browser"
             target="_blank"
+            rel="noopener"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="2" y1="12" x2="22" y2="12"></line>
+            <svg width="20" height="20" viewBox="0 0 24 24">
+              <circle
+                cx="12"
+                cy="12"
+                r="10"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
               <path
-                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-              ></path>
+                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
             </svg>
             Try Web Version
           </a>
         </div>
+        <p class="coming-soon">Mobile app coming soon!</p>
       </div>
-      <div class="hero-image" data-aos="fade-left">
+      <div class="hero-image" data-aos="fade-left" data-aos-duration="800">
         <img
           src="app scrennshots/Neutral Beige Aesthetic Fashion Mockup Instagram Story.png"
           alt="Auraly App Preview"
+          width="300"
+          height="600"
+          loading="lazy"
         />
       </div>
     </header>
 
     <section id="features" class="features">
-      <h2 data-aos="fade-up">Why Choose Auraly?</h2>
+      <h2 data-aos="fade-up" data-aos-duration="600">Why Choose Auraly?</h2>
       <div class="feature-grid">
-        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+        <div
+          class="feature-card"
+          data-aos="fade-up"
+          data-aos-duration="600"
+          data-aos-delay="100"
+        >
           <div class="feature-icon">🎵</div>
           <h3>Creator's Collection</h3>
-          <p>
-            Discover handpicked playlists featuring my personal favorite songs
-            from around the world - a curated musical journey through my
-            collection.
-          </p>
+          <p>Handpicked playlists of favorite songs.</p>
         </div>
-        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+        <div
+          class="feature-card"
+          data-aos="fade-up"
+          data-aos-duration="600"
+          data-aos-delay="200"
+        >
           <div class="feature-icon">🎨</div>
           <h3>Dynamic Themes</h3>
           <p>Beautiful color schemes that adapt to your music.</p>
         </div>
-        <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+        <div
+          class="feature-card"
+          data-aos="fade-up"
+          data-aos-duration="600"
+          data-aos-delay="300"
+        >
           <div class="feature-icon">🔍</div>
-          <h3>Intelligent Search</h3>
-          <p>Find the perfect song with our advanced search capabilities.</p>
-        </div>
-        <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
-          <div class="feature-icon">📱</div>
-          <h3>Cross-Platform</h3>
-          <p>Enjoy your music anywhere, on any device.</p>
+          <h3>Smart Search</h3>
+          <p>Find songs instantly with advanced search.</p>
         </div>
       </div>
     </section>
 
     <section id="about" class="about">
-      <div class="about-content" data-aos="fade-right">
+      <div class="about-content" data-aos="fade-up" data-aos-duration="600">
         <h2>About Auraly</h2>
         <p>
-          Auraly is more than just a music player. It's your personal music
-          companion that understands your taste and helps you discover new music
-          you'll love. With our innovative features and beautiful interface,
-          we're revolutionizing the way you experience music.
+          Your personal music companion that understands your taste and helps
+          you discover new music. Experience a beautiful interface designed for
+          music lovers.
         </p>
       </div>
     </section>
 
-    <section id="app-showcase" class="app-showcase">
-      <h2 data-aos="fade-up">Experience Auraly</h2>
+    <section id="app-preview" class="app-showcase">
+      <h2 data-aos="fade-up" data-aos-duration="600">Preview Auraly</h2>
       <div class="showcase-grid">
-        <div class="showcase-item" data-aos="fade-up" data-aos-delay="100">
-          <div class="showcase-image">
-            <img
-              src="app scrennshots/Neutral Minimal Shadow Photographer Frame Mockup Pinterest Pin (3).png"
-              alt="Auraly Welcome Page"
-            />
-          </div>
-          <h3>Welcome to Auraly</h3>
-          <p>
-            Start your musical journey with a beautiful and intuitive interface.
-          </p>
-        </div>
-        <div class="showcase-item" data-aos="fade-up" data-aos-delay="200">
-          <div class="showcase-image">
-            <img
-              src="app scrennshots/Neutral Minimal Shadow Photographer Frame Mockup Pinterest Pin (2).png"
-              alt="Auraly Search Interface"
-            />
-          </div>
-          <h3>Smart Search</h3>
-          <p>
-            Find your favorite songs instantly with our powerful search feature.
-          </p>
-        </div>
-        <div class="showcase-item" data-aos="fade-up" data-aos-delay="300">
-          <div class="showcase-image">
-            <img
-              src="app scrennshots/Neutral Minimal Shadow Photographer Frame Mockup Pinterest Pin.png"
-              alt="Auraly Song List"
-            />
-          </div>
-          <h3>smart song list</h3>
-          <p>
-            Our smart song list features Automatically curated playlists based
-            on your listening habits.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="download" class="download">
-      <h2 data-aos="fade-up">Ready to Start?</h2>
-      <p data-aos="fade-up">
-        Download Auraly now and transform your music experience.
-      </p>
-      <div class="cta-buttons2">
-        <a
-          href="download.html"
-          class="cta-button download-btn"
-          data-hover="Get it on mobile"
+        <div
+          class="showcase-item"
+          data-aos="fade-up"
+          data-aos-duration="600"
+          data-aos-delay="100"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-          Download App
-        </a>
+          <img
+            src="app scrennshots/Neutral Minimal Shadow Photographer Frame Mockup Pinterest Pin (3).png"
+            alt="Auraly Interface"
+            width="250"
+            height="400"
+            loading="lazy"
+          />
+          <h3>Beautiful Interface</h3>
+          <p>Clean and intuitive design.</p>
+        </div>
+        <div
+          class="showcase-item"
+          data-aos="fade-up"
+          data-aos-duration="600"
+          data-aos-delay="200"
+        >
+          <img
+            src="app scrennshots/Neutral Minimal Shadow Photographer Frame Mockup Pinterest Pin (2).png"
+            alt="Search Feature"
+            width="250"
+            height="400"
+            loading="lazy"
+          />
+          <h3>Quick Search</h3>
+          <p>Find music instantly.</p>
+        </div>
       </div>
     </section>
 
     <footer>
       <div class="footer-content">
         <div class="footer-logo">
-          <img src="icons/icons8-logo-50.svg" alt="Auraly Logo" />
+          <img
+            src="icons/icons8-logo-50.svg"
+            alt="Auraly Logo"
+            width="30"
+            height="30"
+          />
           <span>Auraly</span>
         </div>
         <div class="footer-links">
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Service</a>
-          <a href="#">Contact Us</a>
-        </div>
-        <div class="footer-social">
-          <a href="#"><img src="images/facebook.svg" alt="Facebook" /></a>
-          <a href="#"><img src="images/twitter.svg" alt="Twitter" /></a>
-          <a href="#"><img src="images/instagram.svg" alt="Instagram" /></a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2024 Auraly. All rights reserved.</p>
+        <p>&copy; 2024 Auraly</p>
       </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
       AOS.init({
-        duration: 1000,
+        duration: 600,
         once: true,
+        offset: 100,
       });
-    </script>
-    <script>
+
       document.addEventListener("DOMContentLoaded", function () {
         const hamburger = document.querySelector(".hamburger");
         const navLinks = document.querySelector(".nav-links");
 
-        hamburger.addEventListener("click", function () {
+        hamburger.addEventListener("click", () => {
           hamburger.classList.toggle("active");
           navLinks.classList.toggle("active");
         });
 
-        // Close menu when clicking a link
         document.querySelectorAll(".nav-links a").forEach((link) => {
           link.addEventListener("click", () => {
             hamburger.classList.remove("active");
