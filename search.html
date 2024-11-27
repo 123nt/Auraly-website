@@ -742,6 +742,11 @@
           font-weight: 500;
         `;
 
+        // Check if the app is installed on any device
+        if (window.matchMedia("(display-mode: standalone)").matches) {
+          floatingInstallBtn.style.display = "none"; // Hide button if installed
+        }
+
         floatingInstallBtn.addEventListener("mouseover", () => {
           floatingInstallBtn.style.transform = "scale(1.05)";
           floatingInstallBtn.style.background = "#c79881";
