@@ -3,7 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Auraly - Your AI Music Companion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chewy&display=swap"
+      rel="stylesheet"
+    />
+    <title>Auraly - Your Music Companion</title>
     <link rel="stylesheet" href="shared.css" />
     <link rel="stylesheet" href="auraly.css" />
     <link rel="icon" type="image/svg+xml" href="icons/adaptive-favicon.svg" />
@@ -36,7 +42,12 @@
 
     <header class="hero">
       <div class="hero-content">
-        <h1 data-aos="fade-up">Experience Music with Elegance</h1>
+        <h1 data-aos="fade-up">
+          <span class="dark-text">C o z z y y</span>
+          <span class="regular-text"
+            >Presents Auraly - Elevate Your Musical Journey</span
+          >
+        </h1>
         <p class="hero-main" data-aos="fade-up" data-aos-delay="100">
           Discover a beautifully crafted interface where music meets design.
           Search and explore your favorite tracks with unprecedented ease and
@@ -44,8 +55,11 @@
         </p>
         <p class="app-note" data-aos="fade-up" data-aos-delay="150">
           While our app is in development, you can experience Auraly through our
-          web version. Try it now to explore all the features and functionality
-          just like you would in the app!
+          web version. Please note: During this beta phase, search audio
+          previews are limited to 30 seconds, but you can enjoy full access to
+          our curated playlist section featuring my personal collection of
+          handpicked tracks. Try it now to explore all the features and discover
+          new music!
         </p>
         <div class="cta-buttons" data-aos="fade-up" data-aos-delay="200">
           <a href="#" class="cta-button app-cta app-coming-soon">
@@ -406,39 +420,42 @@
     <footer class="footer">
       <div class="container">
         <div class="footer-content">
-          <div class="footer-nav-section">
-            <h4>Quick Links</h4>
+          <div class="footer-section">
+            <h3>Quick Links</h3>
             <nav class="footer-nav">
               <ul>
-                <li><a href="auraly.html">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#about">About</a></li>
+                <li>
+                  <a href="about-cozzyy.html" class="footer-link"
+                    >About Cozzyy</a
+                  >
+                </li>
+                <li><a href="#features" class="footer-link">Features</a></li>
+                <li><a href="#app-showcase" class="footer-link">App</a></li>
+                <li><a href="#about" class="footer-link">About</a></li>
+                <li>
+                  <a href="#new-features" class="footer-link">New Features</a>
+                </li>
               </ul>
             </nav>
           </div>
 
-          <div class="footer-contact-section">
-            <h4>Connect</h4>
-            <div class="footer-social">
-              <a
-                href="https://twitter.com/auraly_app"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-              >
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a
-                href="https://github.com/auraly-app"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-              >
-                <i class="fab fa-github"></i>
-              </a>
-              <a href="mailto:contact@auraly.com" aria-label="Email">
-                <i class="fas fa-envelope"></i>
-              </a>
+          <div class="footer-section">
+            <h3>Connect</h3>
+            <div class="email-options">
+              <button class="email-link" onclick="toggleEmailOptions()">
+                Email Us
+              </button>
+              <div class="email-dropdown" id="emailDropdown">
+                <a href="mailto:thecozzyy@gmail.com" class="email-option"
+                  >Default Email Client</a
+                >
+                <a
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=thecozzyy@gmail.com"
+                  target="_blank"
+                  class="email-option"
+                  >Open in Gmail</a
+                >
+              </div>
             </div>
           </div>
         </div>
@@ -511,6 +528,12 @@ The web app will then appear on your home screen for quick access!`);
       function toggleDetails(id) {
         const details = document.getElementById(id);
         details.classList.toggle("active");
+      }
+    </script>
+    <script>
+      function toggleEmailOptions() {
+        const emailDropdown = document.getElementById("emailDropdown");
+        emailDropdown.classList.toggle("active");
       }
     </script>
   </body>

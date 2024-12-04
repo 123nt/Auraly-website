@@ -329,6 +329,11 @@ body {
   line-height: 1.2;
 }
 
+.hero-content h1 .regular-text {
+  font-size: 0.7em;
+  font-weight: normal;
+}
+
 .hero-main {
   font-size: clamp(1.1rem, 2vw, 1.25rem);
   color: var(--secondary-color);
@@ -789,6 +794,242 @@ body {
   
   .feature-highlight {
     font-size: 1rem;
+  }
+}
+
+/* About Creator Page Styles */
+.about-creator {
+  padding: 6rem 7%;
+  background: var(--hero-gradient);
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+}
+
+.creator-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.creator-content h1 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+.creator-content .highlight {
+  font-family: 'Chewy', cursive;
+  color: var(--accent-color);
+}
+
+.creator-description {
+  margin-bottom: 3rem;
+}
+
+.creator-description p {
+  font-size: 1.1rem;
+  color: var(--secondary-color);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.creator-contact {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--container-shadow);
+}
+
+.creator-contact h2 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.contact-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+}
+
+.contact-button:hover {
+  background-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .about-creator {
+    padding: 4rem 5%;
+  }
+  
+  .creator-content h1 {
+    font-size: 2rem;
+  }
+  
+  .creator-description p {
+    font-size: 1rem;
+  }
+}
+
+
+
+
+
+/* Story Section */
+.creator-story {
+  background: white;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: var(--container-shadow);
+  margin-bottom: 4rem;
+  text-align: left;
+}
+
+.creator-story h3 {
+  color: var(--primary-color);
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.story-content p {
+  color: var(--secondary-color);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+/* Vision Cards */
+.creator-vision {
+  margin-bottom: 4rem;
+}
+
+.creator-vision h3 {
+  color: var(--primary-color);
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.vision-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin: 0 auto;
+}
+
+.vision-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--container-shadow);
+  transition: transform 0.3s ease;
+}
+
+.vision-card:hover {
+  transform: translateY(-5px);
+}
+
+.vision-card h4 {
+  color: var(--accent-color);
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.vision-card p {
+  color: var(--secondary-color);
+  line-height: 1.6;
+}
+
+/* Connect Section */
+.creator-connect {
+  background: white;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: var(--container-shadow);
+  margin-top: 4rem;
+}
+
+.creator-connect h3 {
+  color: var(--primary-color);
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.creator-connect p {
+  color: var(--secondary-color);
+  margin-bottom: 2rem;
+}
+
+.connect-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.contact-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.contact-button.primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.contact-button.secondary {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.contact-button:hover {
+  transform: translateY(-2px);
+}
+
+.contact-button.primary:hover {
+  background-color: var(--accent-color);
+}
+
+.contact-button.secondary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-creator {
+    padding: 4rem 5%;
+  }
+  
+  .creator-content h1 {
+    font-size: 2.2rem;
+  }
+  
+  .creator-story,
+  .creator-connect {
+    padding: 2rem;
+  }
+  
+  .vision-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .connect-buttons {
+    flex-direction: column;
+  }
+  
+  .contact-button {
+    width: 100%;
+    text-align: center;
   }
 }
 
@@ -1495,4 +1736,88 @@ h3 {
   text-decoration: none;
   font-weight: 500;
   transition: var(--transition);
+}
+
+.dark-text {
+  font-family: 'Chewy', cursive;
+  text-decoration: line-through;
+  text-decoration-thickness: 7px;
+  color: inherit;
+  text-decoration-color: currentColor;
+}
+
+.email-link {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white !important;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.email-link:hover {
+  background-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.email-options {
+  position: relative;
+  display: inline-block;
+}
+
+.email-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  z-index: 1000;
+}
+
+.email-dropdown.active {
+  display: block;
+}
+
+.email-option {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.email-option:first-child {
+  border-radius: 8px 8px 0 0;
+}
+
+.email-option:last-child {
+  border-radius: 0 0 8px 8px;
+}
+
+.email-option:hover {
+  background-color: rgba(139, 115, 85, 0.1);
+}
+
+.email-link {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white !important;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.email-link:hover {
+  background-color: var(--accent-color);
+  transform: translateY(-2px);
 }
