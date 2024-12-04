@@ -1,26 +1,40 @@
 /* About Cozzyy Page Styles */
 :root {
-  --primary-color: #080808;
-  --secondary-color: #5D4E3A;
-  --accent-color: #D4B996;
-  --background-color: #F5F5F5;
-  --text-color: #0a0a0a;
-  --container-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --primary-color: #2d2d2d;
+  --secondary-color: #666666;
+  --accent-color: #4a90e2;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --container-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .about-creator {
-  padding: 6rem 0;
+  padding: 4rem 0;
+  min-height: 100vh;
   background: var(--background-color);
-  min-height: calc(100vh - 80px);
-  display: flex;
-  align-items: center;
+  width: 100%;
 }
 
 .container {
-  width: 100%;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
 }
 
 .creator-content {
@@ -30,20 +44,21 @@
 
 .creator-content h1 {
   font-size: 2.5rem;
-  color: #000000;
-  margin-bottom: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
   text-align: center;
+  font-weight: 600;
+  font-family: 'Chewy', cursive;
 }
 
 .creator-content .highlight {
   font-family: 'Chewy', cursive;
-  color: #000000;
   text-decoration: line-through;
-  text-decoration-thickness: 4px;
-  text-decoration-color: currentColor;
+  text-decoration-thickness: 7px;
+  color: inherit;
+  position: relative;
 }
 
-/* Profile Section */
 .creator-profile {
   margin-bottom: 4rem;
   text-align: center;
@@ -68,81 +83,92 @@
   font-size: 1rem;
 }
 
-/* Story Section */
 .creator-story {
-  background: white;
-  padding: 2.5rem;
-  border-radius: 8px;
-  box-shadow: var(--container-shadow);
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 }
 
 .creator-story h3 {
   color: var(--primary-color);
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   margin-bottom: 1.5rem;
-  text-align: center;
+  font-weight: 500;
 }
 
 .story-content p {
-  color: var(--text-color);
-  line-height: 1.7;
+  color: var(--secondary-color);
+  line-height: 1.8;
   margin-bottom: 1.5rem;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
-/* Services Section */
 .vision-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
   margin: 2rem 0;
 }
 
 .vision-card {
-  background: white;
   padding: 2rem;
+  background: #f8f9fa;
   border-radius: 8px;
-  box-shadow: var(--container-shadow);
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
 }
 
 .vision-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-5px);
 }
 
 .vision-card h4 {
   color: var(--primary-color);
   font-size: 1.3rem;
   margin-bottom: 1rem;
+  font-weight: 500;
 }
 
 .vision-card p {
-  color: var(--text-color);
+  color: var(--secondary-color);
   line-height: 1.6;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
-/* Contact Section */
+.vision-card.custom-service {
+  background: #f0e6d9;
+  border-left: 4px solid var(--accent-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vision-card.custom-service:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.vision-card.custom-service h4 {
+  color: var(--accent-color);
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+}
+
+.vision-card.custom-service p {
+  margin-bottom: 1.5rem;
+}
+
 .creator-connect {
-  background: white;
-  padding: 2.5rem;
-  border-radius: 8px;
-  box-shadow: var(--container-shadow);
+  margin-top: 4rem;
   text-align: center;
-  margin-top: 3rem;
 }
 
 .creator-connect h3 {
   color: var(--primary-color);
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   margin-bottom: 1rem;
+  font-weight: 500;
 }
 
 .creator-connect p {
-  color: var(--text-color);
+  color: var(--secondary-color);
   margin-bottom: 2rem;
-  font-size: 1rem;
+  font-size: 1.1rem;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -150,39 +176,55 @@
 
 .connect-buttons {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   justify-content: center;
 }
 
 .contact-button {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 2rem;
   text-decoration: none;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-  font-size: 0.95rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  font-size: 1rem;
   font-weight: 500;
 }
 
 .contact-button.primary {
-  background-color: var(--primary-color);
+  background-color: var(--accent-color);
   color: white;
 }
 
 .contact-button.secondary {
   background-color: transparent;
-  color: var(--primary-color);
-  border: 1px solid var(--primary-color);
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color);
 }
 
 .contact-button:hover {
+  opacity: 0.9;
   transform: translateY(-2px);
 }
 
-/* Responsive Design */
+.custom-service-btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--accent-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.custom-service-btn:hover {
+  background-color: #666666;
+  transform: translateY(-2px);
+}
+
 @media (max-width: 768px) {
   .about-creator {
-    padding: 4rem 0;
+    padding: 3rem 0;
   }
   
   .creator-content h1 {
@@ -195,14 +237,11 @@
   
   .connect-buttons {
     flex-direction: column;
+    gap: 1rem;
   }
   
   .contact-button {
     width: 100%;
-  }
-  
-  .creator-story,
-  .creator-connect {
-    padding: 2rem;
+    text-align: center;
   }
 }
